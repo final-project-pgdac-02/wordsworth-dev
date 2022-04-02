@@ -12,7 +12,7 @@ public interface IBookService {
 	
 	List<Book> getBooksByBookTitleAndCategory(String title,String category); //need to implement
 	
-	String updateBookStock(Integer bookId,int stock);
+	String updateBookStock(Integer bookId,int stock); //need to implement
 	
 	String updateBookCover(Integer bookId,byte[] bookCover);
 	
