@@ -6,15 +6,15 @@ import com.app.pojos.Book;
 
 public interface IBookService {
 	
-	List<Book> getAllBooks();
+//	List<Book> getAllBooks();
 	
 	Book getBookById(Integer id);
 	
-	List<Book> getBooksByBookTitleAndCategory(String title,String category); //need to implement
+	List<Book> getBooksByCategory(String category); //need to implement
 	
 	String updateBookStock(Integer bookId,int stock); //need to implement
 	
-	String updateBookCover(Integer bookId,byte[] bookCover);
+//	String updateBookCover(Integer bookId,byte[] bookCover);
 	
-	String updateBookPrice(Integer bookId,double price);
+//	String updateBookPrice(Integer bookId,double price);
 }
