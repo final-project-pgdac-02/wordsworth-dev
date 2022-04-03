@@ -46,14 +46,10 @@ public class Card extends BaseEntity {
 		super();
 	}
 	
-	
-
 
 	public String getCardHolderName() {
 		return cardHolderName;
 	}
-
-
 
 
 	public void setCardHolderName(String cardName) {

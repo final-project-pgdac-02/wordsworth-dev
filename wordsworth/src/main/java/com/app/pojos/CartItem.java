@@ -37,6 +37,14 @@ public class CartItem {
 	public CartItem() {
 		super();
 	}
+	
+
+	public CartItem(Book book,int quantity, double actualPrice) {
+		super();
+		this.book = book;
+		this.quantity = quantity;
+		this.actualPrice = actualPrice;
+	}
 
 
 	public Book getBook() {

@@ -49,25 +49,10 @@ public class Book extends BaseEntity {
 	@NotBlank
 	@Length(min=13, max=13)
 	private String isbn;
-	
-////	@JsonIgnore
-//	@OneToMany(mappedBy ="book"  ,cascade = CascadeType.ALL, orphanRemoval = true)
-//	private List<Feedback> feedbacks=new ArrayList<>();
-	
-	
+		
 	public Book() {
 		super();
-	}
-	
-//	//Helper method
-//	public void addFeedback(Feedback feedback) {
-//		feedbacks.add(feedback);
-//	}
-//	
-//	public void removeFeedback(Feedback feedback) {
-//		feedbacks.remove(feedback);
-//	}
-		
+	}	
 	
 	public String getIsbn() {
 		return isbn;
@@ -78,20 +63,6 @@ public class Book extends BaseEntity {
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-
-
-//
-//	public List<Feedback> getFeedbacks() {
-//		return feedbacks;
-//	}
-//
-//
-//
-//	public void setFeedbacks(List<Feedback> feedbacks) {
-//		this.feedbacks = feedbacks;
-//	}
-
-
 
 	public String getBookTitle() {
 		return bookTitle;
