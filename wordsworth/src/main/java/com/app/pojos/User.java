@@ -43,7 +43,7 @@ public class User extends BaseEntity {
 	
 	@Enumerated(EnumType.STRING)
 	@NotNull
-	@Column(nullable = false, /*length = 20*/ columnDefinition = "varchar(20) default 'CUSTOMER'")
+	@Column(nullable = false, columnDefinition = "varchar(20) default 'CUSTOMER'")
 	private Role role;
 	
 	@Column(name="profile_picture")
@@ -54,14 +54,6 @@ public class User extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "membership_id")
 	private Membership membership;
-	
-	
-//	@ManyToMany(cascade = {
-//		    CascadeType.PERSIST,
-//		    CascadeType.MERGE
-//		})
-//	@JoinTable(name="user_cards" , joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="card_id"))
-//	private Set<Card> cards=new HashSet<Card>();
 	
 	
 	@ElementCollection
@@ -81,17 +73,6 @@ public class User extends BaseEntity {
 		cartItems.remove(c);
 	}
 	
-//
-//	public void addCard(Card c) {
-//		cards.add(c);
-//	}
-//	
-//	public void removeCard(Card c) {
-//		cards.remove(c);
-//	}
-	
-//	---------------------------------------
-	
 	
 	public List<CartItem> getCartItems() {
 		return cartItems;
@@ -100,14 +81,6 @@ public class User extends BaseEntity {
 	public void setCartItems(List<CartItem> cartItems) {
 		this.cartItems = cartItems;
 	}
-	
-//	public Set<Card> getCards() {
-//		return cards;
-//	}
-//
-//	public void setCards(Set<Card> cards) {
-//		this.cards = cards;
-//	}
 
 	public User() {
 		super();

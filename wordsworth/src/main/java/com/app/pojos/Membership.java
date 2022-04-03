@@ -16,7 +16,7 @@ public class Membership extends BaseEntity {
 	@NotNull
 	private MembershipType membershipType;
 	
-//	@Column(columnDefinition = "decimal(3,2)")
+
 	@Column(precision = 2)
 	private double discount;
 	

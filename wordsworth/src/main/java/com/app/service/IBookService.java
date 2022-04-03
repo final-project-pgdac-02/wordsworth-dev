@@ -6,7 +6,7 @@ import com.app.pojos.Book;
 
 public interface IBookService {
 	
-//	List<Book> getAllBooks();
+	List<Book> getAllBooks();
 	
 	Book getBookById(Integer id);
 	
@@ -14,7 +14,7 @@ public interface IBookService {
 	
 	String updateBookStock(Integer bookId,int stock); //need to implement
 	
-//	String updateBookCover(Integer bookId,byte[] bookCover);
+	String updateBookCover(Integer bookId,byte[] bookCover);
 	
-//	String updateBookPrice(Integer bookId,double price);
+	String updateBookPrice(Integer bookId,double price);
 }

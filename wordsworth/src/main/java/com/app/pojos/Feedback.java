@@ -18,11 +18,6 @@ public class Feedback extends BaseEntity {
 	
 	@Column(length = 500)
 	private String review;
-	
-//	
-//	@ManyToOne
-//	@JoinColumn(name = "user_id")
-//	private User user;
 
 	@ManyToOne
 	@JoinColumn(name = "book_id", nullable = false)
@@ -33,31 +28,6 @@ public class Feedback extends BaseEntity {
 		super();
 	}
 	
-	
-
-//	public User getUser() {
-//		return user;
-//	}
-//
-//
-//
-//	public void setUser(User user) {
-//		this.user = user;
-//	}
-
-
-
-//	public Book getBook() {
-//		return book;
-//	}
-//
-//
-//
-//	public void setBook(Book book) {
-//		this.book = book;
-//	}
-
-
 	
 
 	public double getRating() {
