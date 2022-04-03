@@ -10,7 +10,7 @@ public interface IBookService {
 	
 	Book getBookById(Integer id);
 	
-	List<Book> getBooksByBookTitleAndCategory(String title,String category); //need to implement
+	List<Book> getBooksByCategory(String category); //need to implement
 	
 	String updateBookStock(Integer bookId,int stock); //need to implement
 	

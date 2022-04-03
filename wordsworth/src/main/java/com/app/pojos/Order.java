@@ -23,12 +23,10 @@ public class Order extends BaseEntity {
 	private LocalDate orderDate;
 	
 	@Range(min=0)
-//	@Column(columnDefinition = "decimal(12,2)")
 	@Column(precision = 2)
 	private double orderTotal;
 	
 	@Range(min=0)
-//	@Column(columnDefinition = "decimal(12,2)")
 	@Column(precision = 2)
 	private double discountedTotal;
 	
