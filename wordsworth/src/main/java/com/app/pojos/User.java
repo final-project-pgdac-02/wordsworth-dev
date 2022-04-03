@@ -16,6 +16,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="users")
 public class User extends BaseEntity {
@@ -66,6 +68,7 @@ public class User extends BaseEntity {
 	
 	@ElementCollection
 	@CollectionTable(name = "cart_items", joinColumns = @JoinColumn(name = "user_id"))
+	@JsonIgnore
 	private List<CartItem> cartItems=new ArrayList<CartItem>();
 	
 	
