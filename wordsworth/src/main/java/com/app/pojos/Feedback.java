@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Range;
 
@@ -18,6 +19,10 @@ public class Feedback extends BaseEntity {
 	
 	@Column(length = 500)
 	private String review;
+	
+	@Column(name="reviewer_Name", length=50, nullable = false)
+	@NotBlank
+	private String reviewerName;
 
 	@ManyToOne
 	@JoinColumn(name = "book_id", nullable = false)
@@ -36,6 +41,19 @@ public class Feedback extends BaseEntity {
 
 	public Book getBook() {
 		return book;
+	}
+
+	
+
+
+	public String getReviewerName() {
+		return reviewerName;
+	}
+
+
+
+	public void setReviewerName(String reviewerName) {
+		this.reviewerName = reviewerName;
 	}
 
 
@@ -62,7 +80,7 @@ public class Feedback extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "Feedback [rating=" + rating + ", review=" + review + "book= "+ book.getBookTitle()+" ]";
+		return "Feedback [rating=" + rating + ", review=" + review + "book= "+ book.getBookTitle()+" reviewerName= "+ reviewerName+" ]";
 	}
 	
 	
