@@ -2,6 +2,7 @@ package com.app.pojos;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -16,67 +17,88 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User extends BaseEntity {
 
-	@Column(name="first_name", length=50, nullable = false)
+	@Column(name = "first_name", length = 50, nullable = false)
 	@NotBlank
 	private String firstName;
-	
-	@Column(name="last_name", length=50, nullable=false)
+
+	@Column(name = "last_name", length = 50, nullable = false)
 	@NotBlank
 	private String lastName;
-	
+
 	@Email
-	@Column(length=50, unique = true, nullable = false)
+	@Column(length = 50, unique = true, nullable = false)
 	@NotBlank
 	private String email;
-	
-	@Column(length=50, nullable = false)
+
+	@Column(length = 50, nullable = false)
 	@NotBlank
 	private String password;
-	
-	@Column(length=10)
+
+	@Column(length = 10)
 	@NotBlank
 	private String phone;
-	
+
 	@Enumerated(EnumType.STRING)
 	@NotNull
-	@Column(nullable = false, columnDefinition = "varchar(20) default 'CUSTOMER'")
+	@Column(nullable = false, /* length = 20 */ columnDefinition = "varchar(20) default 'CUSTOMER'")
 	private Role role;
-	
-	@Column(name="profile_picture")
+
+	@Column(name = "profile_picture")
 	@Lob
 	private byte[] profilePicture;
-	
-	//Unidirectional Many to One, User(*----->1)Membership
+
+	// Unidirectional Many to One, User(*----->1)Membership
 	@ManyToOne
 	@JoinColumn(name = "membership_id")
 	private Membership membership;
-	
-	
+
+//	@ManyToMany(cascade = {
+//		    CascadeType.PERSIST,
+//		    CascadeType.MERGE
+//		})
+//	@JoinTable(name="user_cards" , joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="card_id"))
+//	private Set<Card> cards=new HashSet<Card>();
+
 	@ElementCollection
 	@CollectionTable(name = "cart_items", joinColumns = @JoinColumn(name = "user_id"))
-	@JsonIgnore
-	private List<CartItem> cartItems=new ArrayList<CartItem>();
-	
-	
-	//HELPER METHODS-------------------------
-	
-	
-	
+	//@JsonIgnore //commented JsonIgnore as returning LoginResponse DTO by login user method from UserServiceImpl
+	private List<CartItem> cartItems = new ArrayList<CartItem>();
+
+	// HELPER METHODS-------------------------
+
+	public User(String firstName, String lastName, String email, String password, String phone, Role role) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.phone = phone;
+		this.role = role;
+	}
+
 	public void addCartItem(CartItem c) {
 		cartItems.add(c);
 	}
-	
+
 	public void removeCartItem(CartItem c) {
 		cartItems.remove(c);
 	}
-	
-	
+
+//
+//	public void addCard(Card c) {
+//		cards.add(c);
+//	}
+//	
+//	public void removeCard(Card c) {
+//		cards.remove(c);
+//	}
+
+//	---------------------------------------
+
 	public List<CartItem> getCartItems() {
 		return cartItems;
 	}
@@ -85,23 +107,25 @@ public class User extends BaseEntity {
 		this.cartItems = cartItems;
 	}
 
+//	public Set<Card> getCards() {
+//		return cards;
+//	}
+//
+//	public void setCards(Set<Card> cards) {
+//		this.cards = cards;
+//	}
+
 	public User() {
 		super();
 	}
-	
-	
 
 	public Membership getMembership() {
 		return membership;
 	}
 
-
-
 	public void setMembership(Membership membership) {
 		this.membership = membership;
 	}
-
-
 
 	public String getFirstName() {
 		return firstName;
@@ -150,7 +174,6 @@ public class User extends BaseEntity {
 	public void setRole(Role role) {
 		this.role = role;
 	}
-	
 
 	public byte[] getProfilePicture() {
 		return profilePicture;
@@ -165,6 +188,5 @@ public class User extends BaseEntity {
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", password=" + password
 				+ ", phone=" + phone + ", role=" + role + ", membership=" + membership + "]";
 	}
-	
-	
+
 }

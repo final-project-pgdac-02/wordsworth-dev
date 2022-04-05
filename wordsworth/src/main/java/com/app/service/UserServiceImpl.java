@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.custom_exception.ResourceNotFoundException;
 import com.app.dao.MembershipRepository;
 import com.app.dao.UserRepository;
+import com.app.dto.LoginResponse;
 import com.app.pojos.Membership;
 import com.app.pojos.User;
 
@@ -21,9 +22,10 @@ public class UserServiceImpl implements IUserService {
 	private MembershipRepository membershipDao;
 
 	@Override
-	public User loginUser(String email, String password) {
-		return userRepo.findByEmailAndPassword(email, password)
+	public LoginResponse loginUser(String email, String password) {
+		 User user = userRepo.findByEmailAndPassword(email, password)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Credentials!!!"));
+		 return new LoginResponse(user.getEmail(), user.getPassword(), user.getRole(), user.getId());
 	}
 
 	@Override
@@ -56,10 +58,10 @@ public class UserServiceImpl implements IUserService {
 
 		Membership updatedMembership = membershipDao.findById(membershipId)
 				.orElseThrow(() -> new ResourceNotFoundException("invalid membership id!!!"));
-
+		
 		updateUserMembership.setMembership(updatedMembership);
 
-		return "membership updated successfully for user : " + updateUserMembership.getEmail();
+		return "membership updated successfully for user : "+updateUserMembership.getEmail();
 
 	}
 
