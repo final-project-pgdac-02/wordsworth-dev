@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exception.ResourceNotFoundException;
 import com.app.dao.BookRepository;
+import com.app.dao.FeedbackRepository;
 import com.app.pojos.Book;
 import com.app.pojos.Category;
+import com.app.pojos.Feedback;
 
 @Service
 @Transactional
@@ -17,6 +19,9 @@ public class BookServiceImpl implements IBookService {
 
 	@Autowired
 	BookRepository bookRepo;
+	
+	@Autowired
+	FeedbackRepository feedbackRepo;
 	
 	@Override
 	public Book getBookById(Integer id) {
@@ -52,6 +57,11 @@ public class BookServiceImpl implements IBookService {
 		Book book = bookRepo.findById(bookId).orElseThrow(() -> new ResourceNotFoundException("Could not find book by this ID!"));
 		book.setBookCover(bookCover);
 		return "Book Cover for "+book.getBookTitle()+" has been updated!";
+	}
+
+	@Override
+	public List<Feedback> getFeedbackByBookId(Integer bookId) {
+		return feedbackRepo.findByBookId(bookId);
 	}
 
 }

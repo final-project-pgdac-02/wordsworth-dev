@@ -3,6 +3,7 @@ package com.app.service;
 import java.util.List;
 
 import com.app.pojos.Book;
+import com.app.pojos.Feedback;
 
 public interface IBookService {
 	
@@ -17,4 +18,6 @@ public interface IBookService {
 	String updateBookCover(Integer bookId,byte[] bookCover);
 	
 	String updateBookPrice(Integer bookId,double price);
+	
+	List<Feedback> getFeedbackByBookId(Integer bookId);
 }
