@@ -9,6 +9,7 @@ import com.app.dao.MembershipRepository;
 import com.app.dao.UserRepository;
 import com.app.dto.LoginResponse;
 import com.app.pojos.Membership;
+import com.app.pojos.MembershipType;
 import com.app.pojos.User;
 
 @Service
@@ -30,7 +31,8 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public String registerUser(User user) {
-
+		Membership membership = membershipDao.findByMembershipType(MembershipType.valueOf("REGULAR")).orElseThrow(() -> new ResourceNotFoundException("This membership does not exist!"));
+		user.setMembership(membership);
 		userRepo.save(user);
 
 		return "user registered successfully : " + user.getEmail();
