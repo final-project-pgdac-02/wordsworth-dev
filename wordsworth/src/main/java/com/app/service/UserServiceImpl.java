@@ -26,7 +26,7 @@ public class UserServiceImpl implements IUserService {
 	public LoginResponse loginUser(String email, String password) {
 		 User user = userRepo.findByEmailAndPassword(email, password)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Credentials!!!"));
-		 return new LoginResponse(user.getEmail(), user.getPassword(), user.getRole(), user.getId());
+		 return new LoginResponse(user.getEmail(), user.getFirstName(), user.getRole(), user.getId());
 	}
 
 	@Override
