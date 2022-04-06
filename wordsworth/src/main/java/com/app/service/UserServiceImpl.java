@@ -9,6 +9,7 @@ import com.app.dao.MembershipRepository;
 import com.app.dao.UserRepository;
 import com.app.dto.LoginResponse;
 import com.app.pojos.Membership;
+import com.app.pojos.MembershipType;
 import com.app.pojos.User;
 
 @Service
@@ -25,12 +26,13 @@ public class UserServiceImpl implements IUserService {
 	public LoginResponse loginUser(String email, String password) {
 		 User user = userRepo.findByEmailAndPassword(email, password)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Credentials!!!"));
-		 return new LoginResponse(user.getEmail(), user.getPassword(), user.getRole(), user.getId());
+		 return new LoginResponse(user.getEmail(), user.getFirstName(), user.getRole(), user.getId());
 	}
 
 	@Override
 	public String registerUser(User user) {
-
+		Membership membership = membershipDao.findByMembershipType(MembershipType.valueOf("REGULAR")).orElseThrow(() -> new ResourceNotFoundException("This membership does not exist!"));
+		user.setMembership(membership);
 		userRepo.save(user);
 
 		return "user registered successfully : " + user.getEmail();

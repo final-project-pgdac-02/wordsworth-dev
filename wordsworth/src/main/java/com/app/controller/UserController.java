@@ -17,9 +17,7 @@ import com.app.dao.UserRepository;
 import com.app.dto.CartItemDto;
 import com.app.dto.LoginRequest;
 import com.app.dto.UpdatedUserDto;
-
 import com.app.dto.UserDto;
-
 import com.app.pojos.User;
 import com.app.service.ICartItemService;
 import com.app.service.IUserService;
@@ -84,14 +82,14 @@ public class UserController {
 //		return ResponseEntity.ok(userDtoObject);
 //	}
 
-	@GetMapping("/test/{id}")
-	public ResponseEntity<UserDto> testLogin(@PathVariable Integer id) {
-		User userObject = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("user not found!!!"));
-		UserDto userDtoObject = new UserDto(userObject.getFirstName(), userObject.getLastName(), userObject.getEmail(),
-				userObject.getPassword());
+	// @GetMapping("/test/{id}")
+	// public ResponseEntity<UserDto> testLogin(@PathVariable Integer id) {
+	// 	User userObject = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("user not found!!!"));
+	// 	UserDto userDtoObject = new UserDto(userObject.getFirstName(), userObject.getLastName(), userObject.getEmail(),
+	// 			userObject.getPassword());
 
-		return ResponseEntity.ok(userDtoObject);
-	}
+	// 	return ResponseEntity.ok(userDtoObject);
+	// }
 
 
 	@PutMapping("/changepassword")
