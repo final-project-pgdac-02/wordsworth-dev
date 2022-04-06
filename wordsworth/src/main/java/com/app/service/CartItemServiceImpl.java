@@ -41,13 +41,13 @@ public class CartItemServiceImpl implements ICartItemService {
 	}
 
 	@Override
-	public double saveToCart(Integer userId, Integer bookId, int quantity) {
+	public double saveToCart(Integer userId, Integer bookId) {
 		User user = userRepo.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User by this ID not found!"));
 		Book book = bookRepo.findById(bookId)
 				.orElseThrow(() -> new ResourceNotFoundException("Book by this ID not found!"));
 		double price = book.getPrice();
-		CartItem newCartItem = new CartItem(book, quantity, price);
+		CartItem newCartItem = new CartItem(book, 1, price);
 		user.addCartItem(newCartItem);
 		double totalCartValue = user.getCartItems() //get all cart items
 				.stream() //convert to Stream<CartItem>

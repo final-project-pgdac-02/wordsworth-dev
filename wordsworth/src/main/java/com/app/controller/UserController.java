@@ -14,17 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.custom_exception.ResourceNotFoundException;
 import com.app.dao.UserRepository;
+import com.app.dto.CartItemDto;
 import com.app.dto.LoginRequest;
 import com.app.dto.UpdatedUserDto;
 import com.app.dto.UserDto;
 import com.app.pojos.User;
+import com.app.service.ICartItemService;
 import com.app.service.IUserService;
 
 @RestController
 @RequestMapping("/user")
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000/")
 
 public class UserController {
 
@@ -34,6 +36,10 @@ public class UserController {
 
 	@Autowired
 	private UserRepository userRepo;
+	
+	
+	@Autowired
+	private ICartItemService cartItemServ;
 
 
 //	@PostMapping("/login")
@@ -100,6 +106,11 @@ public class UserController {
 				+ updatedMembershipOfUser.getMembership());
 
 		return userService.updateMembership(updatedMembershipOfUser.getId(), membershipId);
+	}
+	
+	@PostMapping("/addtocart")
+	public double saveItemToCart(@RequestBody CartItemDto cartItem) {
+		return cartItemServ.saveToCart(cartItem.getUserId(), cartItem.getBookId());
 	}
 
 }
