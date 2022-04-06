@@ -14,19 +14,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.custom_exception.ResourceNotFoundException;
 import com.app.dao.UserRepository;
+import com.app.dto.CartItemDto;
 import com.app.dto.LoginRequest;
 import com.app.dto.UpdatedUserDto;
-
 import com.app.dto.UserDto;
-
 import com.app.pojos.User;
+import com.app.service.ICartItemService;
 import com.app.service.IUserService;
 
 @RestController
 @RequestMapping("/user")
 
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000/")
 
 public class UserController {
 
@@ -36,6 +36,10 @@ public class UserController {
 
 	@Autowired
 	private UserRepository userRepo;
+	
+	
+	@Autowired
+	private ICartItemService cartItemServ;
 
 
 //	@PostMapping("/login")
@@ -78,14 +82,14 @@ public class UserController {
 //		return ResponseEntity.ok(userDtoObject);
 //	}
 
-	@GetMapping("/test/{id}")
-	public ResponseEntity<UserDto> testLogin(@PathVariable Integer id) {
-		User userObject = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("user not found!!!"));
-		UserDto userDtoObject = new UserDto(userObject.getFirstName(), userObject.getLastName(), userObject.getEmail(),
-				userObject.getPassword());
+	// @GetMapping("/test/{id}")
+	// public ResponseEntity<UserDto> testLogin(@PathVariable Integer id) {
+	// 	User userObject = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("user not found!!!"));
+	// 	UserDto userDtoObject = new UserDto(userObject.getFirstName(), userObject.getLastName(), userObject.getEmail(),
+	// 			userObject.getPassword());
 
-		return ResponseEntity.ok(userDtoObject);
-	}
+	// 	return ResponseEntity.ok(userDtoObject);
+	// }
 
 
 	@PutMapping("/changepassword")
@@ -102,6 +106,11 @@ public class UserController {
 				+ updatedMembershipOfUser.getMembership());
 
 		return userService.updateMembership(updatedMembershipOfUser.getId(), membershipId);
+	}
+	
+	@PostMapping("/addtocart")
+	public double saveItemToCart(@RequestBody CartItemDto cartItem) {
+		return cartItemServ.saveToCart(cartItem.getUserId(), cartItem.getBookId());
 	}
 
 }
