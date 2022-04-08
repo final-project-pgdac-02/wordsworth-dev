@@ -46,6 +46,20 @@ public class Card extends BaseEntity {
 		super();
 	}
 	
+	
+	
+
+	public Card(String cardHolderName,  String cardNumber,
+			 Type type, LocalDate expiryDate) {
+		super();
+		this.cardHolderName = cardHolderName;
+		this.cardNumber = cardNumber;
+		this.type = type;
+		this.expiryDate = expiryDate;
+	}
+
+
+
 
 	public String getCardHolderName() {
 		return cardHolderName;

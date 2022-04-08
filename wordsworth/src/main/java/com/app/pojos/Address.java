@@ -9,6 +9,8 @@ import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "addresses")
 public class Address extends BaseEntity {
@@ -51,6 +53,22 @@ public class Address extends BaseEntity {
 	
 	
 	
+	
+	public Address( String detailedAddress,  String city,  String addressName,
+			 String state,  String country,  String pinCode) {
+		super();
+		this.detailedAddress = detailedAddress;
+		this.city = city;
+		this.addressName = addressName;
+		this.state = state;
+		this.country = country;
+		this.pinCode = pinCode;
+	}
+
+
+
+
+
 	public User getUser() {
 		return user;
 	}
