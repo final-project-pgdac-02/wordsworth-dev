@@ -53,19 +53,6 @@ public class Book extends BaseEntity {
 		super();
 	}
 
-//	public Book(String bookTitle, String author, String publication, Category category, int stock, double averageRating,
-//			double price, String isbn) {
-//		super();
-//		this.bookTitle = bookTitle;
-//		this.author = author;
-//		this.publication = publication;
-//		this.category = category;
-//		this.stock = stock;
-//		this.averageRating = averageRating;
-//		this.price = price;
-//		this.isbn = isbn;
-//	}
-
 	public String getIsbn() {
 		return isbn;
 	}
