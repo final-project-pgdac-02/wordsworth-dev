@@ -13,27 +13,31 @@ import org.hibernate.validator.constraints.Range;
 @Table(name = "feedbacks")
 public class Feedback extends BaseEntity {
 
-	@Range(min=1,max=5, message = "Rating should be between 1 and 5!")
+	@Range(min = 1, max = 5, message = "Rating should be between 1 and 5!")
 	@Column(precision = 1)
 	private double rating;
-	
+
 	@Column(length = 500)
 	private String review;
-	
-	@Column(name="reviewer_Name", length=50, nullable = false)
+
+	@Column(name = "reviewer_Name", length = 50, nullable = false)
 	@NotBlank
 	private String reviewerName;
 
 	@ManyToOne
 	@JoinColumn(name = "book_id", nullable = false)
 	private Book book;
-	
-	
+
 	public Feedback() {
 		super();
 	}
-	
-	
+
+	public Feedback(double rating, String review, String reviewerName) {
+		super();
+		this.rating = rating;
+		this.review = review;
+		this.reviewerName = reviewerName;
+	}
 
 	public double getRating() {
 		return rating;
@@ -43,26 +47,17 @@ public class Feedback extends BaseEntity {
 		return book;
 	}
 
-	
-
-
 	public String getReviewerName() {
 		return reviewerName;
 	}
-
-
 
 	public void setReviewerName(String reviewerName) {
 		this.reviewerName = reviewerName;
 	}
 
-
-
 	public void setBook(Book book) {
 		this.book = book;
 	}
-
-
 
 	public void setRating(double rating) {
 		this.rating = rating;
@@ -76,13 +71,10 @@ public class Feedback extends BaseEntity {
 		this.review = review;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "Feedback [rating=" + rating + ", review=" + review + "book= "+ book.getBookTitle()+" reviewerName= "+ reviewerName+" ]";
+		return "Feedback [rating=" + rating + ", review=" + review + "book= " + book.getBookTitle() + " reviewerName= "
+				+ reviewerName + " ]";
 	}
-	
-	
-	
+
 }
