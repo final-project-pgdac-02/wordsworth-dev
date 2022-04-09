@@ -70,4 +70,16 @@ public class BookServiceImpl implements IBookService {
 		return "book added successfully by Title : " + addBook.getBookTitle();
 	}
 
+	@Override
+	public double updateRatingByBookId(Integer bookId) {
+		double calculatedRating=feedbackRepo.findByBookId(bookId).stream().mapToDouble(f->f.getRating()).average().orElse(1);
+		Book temp=bookRepo.getById(bookId);
+		calculatedRating=Math.round(calculatedRating*100.0)/100.0;
+		temp.setAverageRating(calculatedRating);
+		
+		return calculatedRating;
+	}
+	
+	
+
 }
