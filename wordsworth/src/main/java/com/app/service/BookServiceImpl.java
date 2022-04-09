@@ -73,10 +73,9 @@ public class BookServiceImpl implements IBookService {
 	@Override
 	public double updateRatingByBookId(Integer bookId) {
 		double calculatedRating=feedbackRepo.findByBookId(bookId).stream().mapToDouble(f->f.getRating()).average().orElse(1);
-		Book temp=bookRepo.getById(bookId);
+		Book temp=bookRepo.findById(bookId).orElseThrow(() -> new ResourceNotFoundException("Book by given ID not found!"));
 		calculatedRating=Math.round(calculatedRating*100.0)/100.0;
 		temp.setAverageRating(calculatedRating);
-		
 		return calculatedRating;
 	}
 	

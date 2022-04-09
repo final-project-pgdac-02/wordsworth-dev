@@ -6,8 +6,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
-
-import com.app.service.IBookService;
 import com.app.service.IFeedbackService;
 
 @SpringBootApplication
@@ -20,7 +18,7 @@ public class WordsworthApplication {
 		SpringApplication.run(WordsworthApplication.class, args);
 	}
 	
-	@Scheduled(fixedDelay = 960000)
+	@Scheduled(fixedDelay = 300000)
 	void testScheduled() throws InterruptedException{
 		System.out.println("Scheduled method runnning");
 		System.out.println(feedbackServ.updateAllBookRatings());
