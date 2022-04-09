@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.app.dto.CartSummaryDto;
 import com.app.dto.UserCartDto;
+import com.app.service.ICartItemService;
 import com.app.service.IUserService;
 
 @RestController
@@ -22,10 +24,18 @@ public class CartController {
 	
 	@Autowired
 	private IUserService userService;
+	
+	@Autowired
+	private ICartItemService cartItemService;
 
 	@GetMapping("/{userId}")
 	public List<UserCartDto> getUserCart(@PathVariable Integer userId){
 		return userService.getUserCart(userId);
+	}
+	
+	@GetMapping("/getcarttotal/{userId}")
+	public CartSummaryDto getCartTotalByUserId(@PathVariable Integer userId) {
+		return cartItemService.getCartTotalByUserId(userId);
 	}
 	
 }

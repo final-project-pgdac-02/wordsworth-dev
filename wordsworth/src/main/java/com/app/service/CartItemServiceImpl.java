@@ -8,9 +8,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exception.ResourceNotFoundException;
 import com.app.dao.BookRepository;
+import com.app.dao.MembershipRepository;
 import com.app.dao.UserRepository;
+import com.app.dto.CartSummaryDto;
 import com.app.pojos.Book;
 import com.app.pojos.CartItem;
+import com.app.pojos.Membership;
 import com.app.pojos.User;
 
 @Service
@@ -22,6 +25,9 @@ public class CartItemServiceImpl implements ICartItemService {
 
 	@Autowired
 	BookRepository bookRepo;
+	
+	@Autowired
+	MembershipRepository membershipRepo;
 
 	@Override
 	public String incrementCartItem(Integer userId, Integer bookId) {
@@ -38,7 +44,7 @@ public class CartItemServiceImpl implements ICartItemService {
 		
 		return "Quantity incremented for bookId= " +bookId;
 		
-//		return cartItemList.stream().mapToDouble(c->c.getActualPrice()*c.getQuantity()).sum();
+
 		
 	}
 
@@ -76,5 +82,24 @@ public class CartItemServiceImpl implements ICartItemService {
 			totalCartValue+=item.getActualPrice()*item.getQuantity();
 		}
 		return totalCartValue;
+	}
+
+	@Override
+	public CartSummaryDto getCartTotalByUserId(Integer userId) {
+		User temp = userRepo.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User by given User ID not found in database"));
+
+		Membership membership= membershipRepo.findById(temp.getMembership().getId()).orElseThrow(()->new RuntimeException("invalid category token"));
+		
+		
+		
+		List<CartItem> cartItemList = temp.getCartItems();
+		
+		CartSummaryDto cartSummary=new CartSummaryDto();
+		cartSummary.setTotalItems(cartItemList.stream().mapToInt(c->c.getQuantity()).sum());
+		cartSummary.setCartSubTotal(cartItemList.stream().mapToDouble(c->c.getActualPrice()*c.getQuantity()).sum());
+		cartSummary.setDiscountedTotal(cartSummary.getCartSubTotal()*(100-membership.getDiscount())/100);
+		
+		return cartSummary;
 	}
 }
