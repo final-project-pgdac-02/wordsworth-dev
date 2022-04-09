@@ -1,9 +1,12 @@
 package com.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,6 +18,7 @@ import com.app.dao.UserRepository;
 import com.app.dto.CartItemDto;
 import com.app.dto.LoginRequest;
 import com.app.dto.UpdatedUserDto;
+import com.app.dto.UserCartDto;
 import com.app.pojos.Address;
 import com.app.pojos.Card;
 import com.app.pojos.User;
@@ -33,11 +37,6 @@ public class UserController {
 
 	@Autowired
 	private IUserService userService;
-
-
-	@Autowired
-	private UserRepository userRepo;
-	
 	
 	@Autowired
 	private ICartItemService cartItemServ;
@@ -129,5 +128,9 @@ public class UserController {
 	public String addACard(@PathVariable Integer userId,@RequestBody Card card) {
 		return cardService.addCard(userId, card);
 	}
-
+	
+	@GetMapping("/usercart/{userId}")
+		public List<UserCartDto> getUserCart(@PathVariable Integer userId){
+			return userService.getUserCart(userId);
+		}
 }

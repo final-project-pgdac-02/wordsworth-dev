@@ -53,7 +53,7 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	@Override
-	public String updateBookCover(Integer bookId, byte[] bookCover) {
+	public String updateBookCover(Integer bookId, String bookCover) {
 		Book book = bookRepo.findById(bookId).orElseThrow(() -> new ResourceNotFoundException("Could not find book by this ID!"));
 		book.setBookCover(bookCover);
 		return "Book Cover for "+book.getBookTitle()+" has been updated!";
