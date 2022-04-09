@@ -7,4 +7,5 @@ public interface ICartItemService {
 	String incrementCartItem(Integer userId,Integer bookId);
 	double decrementCartItem(Integer userId,Integer bookId); // need to be implemented!!!
 	CartSummaryDto getCartTotalByUserId(Integer userId);
+	String setCartItemQuantityByBookId(Integer userId,Integer bookId, int quantity);
 }
