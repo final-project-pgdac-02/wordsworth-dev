@@ -63,6 +63,12 @@ public class BookServiceImpl implements IBookService {
 	public List<Feedback> getFeedbackByBookId(Integer bookId) {
 		return feedbackRepo.findByBookId(bookId);
 	}
+	
+	@Override
+	public String addBook(Book addBook) {
+		bookRepo.save(addBook);
+		return "book added successfully by Title : " + addBook.getBookTitle();
+	}
 
 	@Override
 	public double updateRatingByBookId(Integer bookId) {

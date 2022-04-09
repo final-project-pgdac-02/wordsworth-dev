@@ -22,4 +22,7 @@ public interface IBookService {
 	List<Feedback> getFeedbackByBookId(Integer bookId);
 	
 	double updateRatingByBookId(Integer bookId); 
+	
+	String addBook(Book book);
+
 }

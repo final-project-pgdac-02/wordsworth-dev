@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,13 +11,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.custom_exception.ResourceNotFoundException;
 import com.app.dao.UserRepository;
 import com.app.dto.CartItemDto;
 import com.app.dto.LoginRequest;
 import com.app.dto.UpdatedUserDto;
-import com.app.dto.UserDto;
+import com.app.pojos.Address;
+import com.app.pojos.Card;
 import com.app.pojos.User;
+import com.app.service.IAddressService;
+import com.app.service.ICardService;
 import com.app.service.ICartItemService;
 import com.app.service.IUserService;
 
@@ -40,6 +41,12 @@ public class UserController {
 	
 	@Autowired
 	private ICartItemService cartItemServ;
+	
+	@Autowired
+	private IAddressService addressService;
+	
+	@Autowired
+	private ICardService cardService;
 
 
 //	@PostMapping("/login")
@@ -111,6 +118,16 @@ public class UserController {
 	@PostMapping("/addtocart")
 	public double saveItemToCart(@RequestBody CartItemDto cartItem) {
 		return cartItemServ.saveToCart(cartItem.getUserId(), cartItem.getBookId());
+	}
+	
+	@PostMapping("/addanaddress/{userId}")
+	public String addAnAddress( @PathVariable Integer userId,@RequestBody Address addedAddress) {		
+		return addressService.addAddress(userId, addedAddress);
+	}
+	
+	@PostMapping("/addacard/{userId}")
+	public String addACard(@PathVariable Integer userId,@RequestBody Card card) {
+		return cardService.addCard(userId, card);
 	}
 
 }
