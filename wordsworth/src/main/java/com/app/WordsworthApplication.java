@@ -22,12 +22,9 @@ public class WordsworthApplication {
 	
 	@Scheduled(fixedDelay = 30000)
 	void testScheduled() throws InterruptedException{
-		System.out.println("Scheduled method runnnnnnnnnnnnnnnnninggggggggg");
-//		bookServ.getAllBooks().forEach(s->System.out.println(s.getBookTitle()));
+		System.out.println("Scheduled method runnning");
 		System.out.println(feedbackServ.updateAllBookRatings());
-//		Thread.sleep(0);
 	}
-
 }
 
 @Configuration
