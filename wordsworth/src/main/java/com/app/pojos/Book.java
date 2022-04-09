@@ -29,9 +29,8 @@ public class Book extends BaseEntity {
 	@NotNull
 	private Category category;
 
-	@Column(name = "book_cover")
-	@Lob
-	private byte[] bookCover;
+	@Column(name = "book_cover", length = 1000)
+	private String bookCover;
 
 	@Range(min = 0, message = "Stock cannot be negative")
 	private int stock;
@@ -93,11 +92,13 @@ public class Book extends BaseEntity {
 		this.category = category;
 	}
 
-	public byte[] getBookCover() {
+	
+
+	public String getBookCover() {
 		return bookCover;
 	}
 
-	public void setBookCover(byte[] bookCover) {
+	public void setBookCover(String bookCover) {
 		this.bookCover = bookCover;
 	}
 
