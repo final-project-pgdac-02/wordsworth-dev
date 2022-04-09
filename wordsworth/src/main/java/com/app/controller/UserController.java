@@ -133,4 +133,14 @@ public class UserController {
 //		public List<UserCartDto> getUserCart(@PathVariable Integer userId){
 //			return userService.getUserCart(userId);
 //		}
+	
+	@GetMapping("/getcards/{userId}")
+	public ResponseEntity<?> getUserCards(@PathVariable Integer userId){
+		return new ResponseEntity<>(cardService.getCardsByUserId(userId),HttpStatus.OK);
+	}
+	
+	@GetMapping("/getaddresses/{userId}")
+	public ResponseEntity<?> getUserAddresses(@PathVariable Integer userId){
+		return new ResponseEntity<>(addressService.getAddressListByUserId(userId),HttpStatus.OK);
+	}
 }

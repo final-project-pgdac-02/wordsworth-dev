@@ -56,7 +56,7 @@ public class CartItemServiceImpl implements ICartItemService {
 		Book book = bookRepo.findById(bookId)
 				.orElseThrow(() -> new ResourceNotFoundException("Book by this ID not found!"));
 		double price = book.getPrice();
-		String message[] = { "" }; //because local variable can't be accessed in lambda, make array and change the value inside array
+		String message[] = { "" }; //because local variable can't be accessed in lambda unless it's final/effectively final, make array and change the value inside array
 		user.getCartItems().stream().filter(c -> c.getBook().getId() == bookId).findAny().ifPresentOrElse(c-> {c.setQuantity(c.getQuantity()+1); message[0]=book.getBookTitle()+" quantity incremented!";}, ()->{CartItem newCartItem = new CartItem(book, 1, price); user.addCartItem(newCartItem); message[0]=book.getBookTitle()+" added to cart!";});
 		
 //		CartItem newCartItem = new CartItem(book, 1, price); 
@@ -89,17 +89,37 @@ public class CartItemServiceImpl implements ICartItemService {
 		User temp = userRepo.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User by given User ID not found in database"));
 
-		Membership membership= membershipRepo.findById(temp.getMembership().getId()).orElseThrow(()->new RuntimeException("invalid category token"));
-		
-		
+		Membership membership= membershipRepo.findById(temp.getMembership().getId()).orElseThrow(()->new ResourceNotFoundException("invalid category token"));	
 		
 		List<CartItem> cartItemList = temp.getCartItems();
 		
 		CartSummaryDto cartSummary=new CartSummaryDto();
-		cartSummary.setTotalItems(cartItemList.stream().mapToInt(c->c.getQuantity()).sum());
-		cartSummary.setCartSubTotal(cartItemList.stream().mapToDouble(c->c.getActualPrice()*c.getQuantity()).sum());
-		cartSummary.setDiscountedTotal(cartSummary.getCartSubTotal()*(100-membership.getDiscount())/100);
+		
+		double[] values = {0,0}; //index 0 = total items, index 1 = cart sub-total
+		cartItemList.stream().forEach(item -> {
+			values[0]+=item.getQuantity();
+			values[1]+=item.getActualPrice()*item.getQuantity();
+		});
+		cartSummary.setTotalItems((int)values[0]);
+		cartSummary.setCartSubTotal(values[1]);
+		
+//		cartSummary.setTotalItems(cartItemList.stream().mapToInt(c->c.getQuantity()).sum());
+//		cartSummary.setCartSubTotal(cartItemList.stream().mapToDouble(c->c.getActualPrice()*c.getQuantity()).sum());
+		
+		double cartDiscountedTotal = cartSummary.getCartSubTotal()*(100-membership.getDiscount())/100.0;
+		cartSummary.setDiscountedTotal(Math.round(cartDiscountedTotal*100.0)/100.0);
 		
 		return cartSummary;
+	}
+
+	@Override
+	public String setCartItemQuantityByBookId(Integer userId, Integer bookId, int quantity) {
+		User user = userRepo.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User by this ID not found!"));
+		Book book = bookRepo.findById(bookId)
+				.orElseThrow(() -> new ResourceNotFoundException("Book by this ID not found!"));
+		String message[] = { "" }; //because local variable can't be accessed in lambda unless it's final/effectively final, make array and change the value inside array
+		user.getCartItems().stream().filter(c -> c.getBook().getId() == bookId).findAny().ifPresentOrElse(c-> {c.setQuantity(quantity); message[0]=book.getBookTitle()+" quantity set to "+quantity;}, ()-> message[0]=book.getBookTitle()+" not present in cart!");
+		return message[0];
 	}
 }

@@ -48,10 +48,6 @@ public class Address extends BaseEntity {
 		super();
 	}
 	
-	
-	
-	
-	
 	public Address( String detailedAddress,  String city,  String addressName,
 			 String state,  String country,  String pinCode) {
 		super();
