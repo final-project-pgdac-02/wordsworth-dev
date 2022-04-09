@@ -24,7 +24,7 @@ public class CartItemServiceImpl implements ICartItemService {
 	BookRepository bookRepo;
 
 	@Override
-	public double incrementCartItem(Integer userId, Integer bookId) {
+	public String incrementCartItem(Integer userId, Integer bookId) {
 
 		User temp = userRepo.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User by given User ID not found in database"));
@@ -36,7 +36,9 @@ public class CartItemServiceImpl implements ICartItemService {
 
 		cartItem.setQuantity(cartItem.getQuantity()+1);
 		
-		return cartItemList.stream().mapToDouble(c->c.getActualPrice()*c.getQuantity()).sum();
+		return "Quantity incremented for bookId= " +bookId;
+		
+//		return cartItemList.stream().mapToDouble(c->c.getActualPrice()*c.getQuantity()).sum();
 		
 	}
 

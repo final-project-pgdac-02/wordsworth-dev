@@ -129,8 +129,8 @@ public class UserController {
 		return cardService.addCard(userId, card);
 	}
 	
-	@GetMapping("/usercart/{userId}")
-		public List<UserCartDto> getUserCart(@PathVariable Integer userId){
-			return userService.getUserCart(userId);
-		}
+//	@GetMapping("/usercart/{userId}")
+//		public List<UserCartDto> getUserCart(@PathVariable Integer userId){
+//			return userService.getUserCart(userId);
+//		}
 }
