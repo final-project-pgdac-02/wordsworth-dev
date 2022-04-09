@@ -82,7 +82,7 @@ public class UserServiceImpl implements IUserService {
 		List<UserCartDto> userCart=new ArrayList<>();
 		List<CartItem> cartItems = userRepo.getById(userId).getCartItems();
 		for(CartItem c: cartItems) {
-			Book temp=bookRepo.getById(c.getBook().getId());
+			Book temp=bookRepo.findById(c.getBook().getId()).orElseThrow(() -> new ResourceNotFoundException("Couldn't find book by ID!"));
 			userCart.add(new UserCartDto(temp.getId(), userId, c.getQuantity(),temp.getBookCover(),temp.getPrice(), temp.getBookTitle()));
 		}
 		
