@@ -41,19 +41,25 @@ public class CartItemServiceImpl implements ICartItemService {
 	}
 
 	@Override
-	public double saveToCart(Integer userId, Integer bookId) {
+	public String saveToCart(Integer userId, Integer bookId) {
+		
 		User user = userRepo.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User by this ID not found!"));
 		Book book = bookRepo.findById(bookId)
 				.orElseThrow(() -> new ResourceNotFoundException("Book by this ID not found!"));
 		double price = book.getPrice();
-		CartItem newCartItem = new CartItem(book, 1, price);
-		user.addCartItem(newCartItem);
-		double totalCartValue = user.getCartItems() //get all cart items
-				.stream() //convert to Stream<CartItem>
-				.mapToDouble(item -> item.getQuantity() * item.getActualPrice()) //for each item, map such that quantity * price
-				.sum(); //sum the prices
-		return totalCartValue;
+		String message[] = { "" }; //because local variable can't be accessed in lambda, make array and change the value inside array
+		user.getCartItems().stream().filter(c -> c.getBook().getId() == bookId).findAny().ifPresentOrElse(c-> {c.setQuantity(c.getQuantity()+1); message[0]=book.getBookTitle()+" quantity incremented!";}, ()->{CartItem newCartItem = new CartItem(book, 1, price); user.addCartItem(newCartItem); message[0]=book.getBookTitle()+" added to cart!";});
+		
+//		CartItem newCartItem = new CartItem(book, 1, price); 
+//		user.addCartItem(newCartItem);
+//		double totalCartValue = user.getCartItems() //get all cart items
+//				.stream() //convert to Stream<CartItem>
+//				.mapToDouble(item -> item.getQuantity() * item.getActualPrice()) //for each item, map such that quantity * price
+//				.sum(); //sum the prices
+//		return totalCartValue;
+		
+		return message[0];
 	}
 
 	@Override
