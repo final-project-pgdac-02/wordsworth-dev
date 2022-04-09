@@ -102,11 +102,15 @@ public class CartItemServiceImpl implements ICartItemService {
 		});
 		cartSummary.setTotalItems((int)values[0]);
 		cartSummary.setCartSubTotal(values[1]);
-		
+		double cartDiscountedTotal = 0;
 //		cartSummary.setTotalItems(cartItemList.stream().mapToInt(c->c.getQuantity()).sum());
 //		cartSummary.setCartSubTotal(cartItemList.stream().mapToDouble(c->c.getActualPrice()*c.getQuantity()).sum());
 		
-		double cartDiscountedTotal = cartSummary.getCartSubTotal()*(100-membership.getDiscount())/100.0;
+		if(membership.isDiscountIsActive()) { //check if discount active
+			cartDiscountedTotal = cartSummary.getCartSubTotal()*(100-membership.getDiscount())/100.0;
+		} else {
+			cartDiscountedTotal = cartSummary.getCartSubTotal();
+		}
 		cartSummary.setDiscountedTotal(Math.round(cartDiscountedTotal*100.0)/100.0);
 		
 		return cartSummary;
