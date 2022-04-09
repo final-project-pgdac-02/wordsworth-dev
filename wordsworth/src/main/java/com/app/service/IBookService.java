@@ -20,4 +20,6 @@ public interface IBookService {
 	String updateBookPrice(Integer bookId,double price);
 	
 	List<Feedback> getFeedbackByBookId(Integer bookId);
+	
+	double updateRatingByBookId(Integer bookId); 
 }

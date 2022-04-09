@@ -13,7 +13,7 @@ import com.app.pojos.User;
 @Service
 @Transactional
 public class AddressServiceImpl implements IAddressService {
-
+	
 	@Autowired
 	AddressRepository addressRepo;
 	
