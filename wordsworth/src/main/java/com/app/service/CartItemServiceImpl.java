@@ -56,8 +56,23 @@ public class CartItemServiceImpl implements ICartItemService {
 		Book book = bookRepo.findById(bookId)
 				.orElseThrow(() -> new ResourceNotFoundException("Book by this ID not found!"));
 		double price = book.getPrice();
-		String message[] = { "" }; //because local variable can't be accessed in lambda unless it's final/effectively final, make array and change the value inside array
-		user.getCartItems().stream().filter(c -> c.getBook().getId() == bookId).findAny().ifPresentOrElse(c-> {c.setQuantity(c.getQuantity()+1); message[0]=book.getBookTitle()+" quantity incremented!";}, ()->{CartItem newCartItem = new CartItem(book, 1, price); user.addCartItem(newCartItem); message[0]=book.getBookTitle()+" added to cart!";});
+		String message = ""; 
+		boolean actionDone = false;
+		for(CartItem item : user.getCartItems()) {
+			if(item.getBook().getId()==bookId) {
+				item.setQuantity(item.getQuantity()+1);
+				message=book.getBookTitle()+" quantity incremented!";
+				actionDone = true;
+				break;
+			} else {
+				continue;
+			}
+		}
+		if(!actionDone) {
+			CartItem newCartItem = new CartItem(book, 1, price); 
+			user.addCartItem(newCartItem); 
+			message=book.getBookTitle()+" added to cart!";
+		}		
 		
 //		CartItem newCartItem = new CartItem(book, 1, price); 
 //		user.addCartItem(newCartItem);
@@ -67,7 +82,7 @@ public class CartItemServiceImpl implements ICartItemService {
 //				.sum(); //sum the prices
 //		return totalCartValue;
 		
-		return message[0];
+		return message;
 	}
 
 	@Override
@@ -101,8 +116,9 @@ public class CartItemServiceImpl implements ICartItemService {
 			values[1]+=item.getActualPrice()*item.getQuantity();
 		});
 		cartSummary.setTotalItems((int)values[0]);
-		cartSummary.setCartSubTotal(values[1]);
+		cartSummary.setCartSubTotal(Math.round(values[1]*100.0)/100.0);
 		double cartDiscountedTotal = 0;
+		
 //		cartSummary.setTotalItems(cartItemList.stream().mapToInt(c->c.getQuantity()).sum());
 //		cartSummary.setCartSubTotal(cartItemList.stream().mapToDouble(c->c.getActualPrice()*c.getQuantity()).sum());
 		
@@ -122,8 +138,16 @@ public class CartItemServiceImpl implements ICartItemService {
 				.orElseThrow(() -> new ResourceNotFoundException("User by this ID not found!"));
 		Book book = bookRepo.findById(bookId)
 				.orElseThrow(() -> new ResourceNotFoundException("Book by this ID not found!"));
-		String message[] = { "" }; //because local variable can't be accessed in lambda unless it's final/effectively final, make array and change the value inside array
-		user.getCartItems().stream().filter(c -> c.getBook().getId() == bookId).findAny().ifPresentOrElse(c-> {c.setQuantity(quantity); message[0]=book.getBookTitle()+" quantity set to "+quantity;}, ()-> message[0]=book.getBookTitle()+" not present in cart!");
-		return message[0];
+		String message = "" ; //because local variable can't be accessed in lambda unless it's final/effectively final, make array and change the value inside array
+		for(CartItem item : user.getCartItems()) {
+			if(item.getBook().getId()==bookId) {
+				item.setQuantity(quantity);
+				message=book.getBookTitle()+" quantity set to "+quantity;
+				break;
+			} else {
+				message=book.getBookTitle()+" not present in cart!";
+			}
+		}
+		return message;
 	}
 }
