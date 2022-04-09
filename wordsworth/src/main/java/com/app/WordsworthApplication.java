@@ -20,7 +20,7 @@ public class WordsworthApplication {
 		SpringApplication.run(WordsworthApplication.class, args);
 	}
 	
-	@Scheduled(fixedDelay = 30000)
+	@Scheduled(fixedDelay = 960000)
 	void testScheduled() throws InterruptedException{
 		System.out.println("Scheduled method runnnnnnnnnnnnnnnnninggggggggg");
 //		bookServ.getAllBooks().forEach(s->System.out.println(s.getBookTitle()));

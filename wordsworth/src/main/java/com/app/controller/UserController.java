@@ -116,7 +116,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/addtocart")
-	public double saveItemToCart(@RequestBody CartItemDto cartItem) {
+	public String saveItemToCart(@RequestBody CartItemDto cartItem) {
 		return cartItemServ.saveToCart(cartItem.getUserId(), cartItem.getBookId());
 	}
 	
