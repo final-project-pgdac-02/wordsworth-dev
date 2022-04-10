@@ -37,4 +37,13 @@ public class CartController {
 		return cartItemService.getCartTotalByUserId(userId);
 	}
 	
+	@PutMapping("/increment/{userId}/{bookId}")
+	public String incrementCartItem(@PathVariable Integer userId, @PathVariable Integer bookId) {
+		return cartItemService.incrementCartItem(userId, bookId);
+	}
+	
+	@PutMapping("/decrement/{userId}/{bookId}")
+	public double decrementCartItem(@PathVariable Integer userId, @PathVariable Integer bookId) {
+		return cartItemService.decrementCartItem(userId, bookId);
+	}
 }
