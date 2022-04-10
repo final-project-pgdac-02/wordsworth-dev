@@ -5,11 +5,24 @@ public class CartItemDto {
 	private int bookId;
 	private int userId;
 	private int quantity;
+	private int cartId;
 	
 	
 	
 	public CartItemDto() {
 		super();
+	}
+
+
+
+	public int getCartId() {
+		return cartId;
+	}
+
+
+
+	public void setCartId(int cartId) {
+		this.cartId = cartId;
 	}
 
 

@@ -4,6 +4,7 @@ public class UserCartDto {
 
 	private int bookId;
 	private int userId;
+	private int cartItemId;
 	private int quantity;
 	private String bookCover;
 	private double price;
@@ -15,14 +16,27 @@ public class UserCartDto {
 	}
 
 
-	public UserCartDto(int bookId, int userId, int quantity, String bookCover, double price, String bookTitle) {
+	public UserCartDto(int bookId, int userId, int cartId, int quantity, String bookCover, double price, String bookTitle) {
 		super();
 		this.bookId = bookId;
 		this.userId = userId;
+		this.cartItemId = cartId;
 		this.quantity = quantity;
 		this.bookCover = bookCover;
 		this.price = price;
 		this.bookTitle = bookTitle;
+	}
+	
+
+
+
+	public int getCartItemId() {
+		return cartItemId;
+	}
+
+
+	public void setCartItemId(int cartItemId) {
+		this.cartItemId = cartItemId;
 	}
 
 
