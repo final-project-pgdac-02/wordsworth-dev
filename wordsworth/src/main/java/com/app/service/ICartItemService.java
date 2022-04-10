@@ -8,4 +8,6 @@ public interface ICartItemService {
 	String decrementCartItemById(Integer cartId);
 //	CartSummaryDto getCartTotalByUserId(Integer userId);
 	String setCartItemQuantityById(Integer cartId, int quantity);
+	
+	String deleteCartItemByCartItemId(Integer cartItemId);
 }

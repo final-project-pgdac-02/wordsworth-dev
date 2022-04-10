@@ -3,7 +3,9 @@ package com.app.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,8 +30,8 @@ public class CartController {
 	private ICartItemService cartItemService;
 
 	@GetMapping("/{userId}")
-	public List<UserCartDto> getUserCart(@PathVariable Integer userId){
-		return userService.getUserCart(userId);
+	public ResponseEntity<?> getUserCart(@PathVariable Integer userId){
+		return ResponseEntity.ok().body(userService.getUserCart(userId));
 	}
 	
 //	@GetMapping("/getcarttotal/{userId}")
@@ -45,5 +47,10 @@ public class CartController {
 	@PutMapping("/decrement/{cartId}")
 	public String decrementCartItem(@PathVariable Integer cartId) {
 		return cartItemService.decrementCartItemById(cartId);
+	}
+	
+	@DeleteMapping("/{cartId}")
+	public String deleteCartItem(@PathVariable Integer cartId) {
+		return cartItemService.deleteCartItemByCartItemId(cartId);
 	}
 }

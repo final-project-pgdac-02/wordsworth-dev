@@ -78,6 +78,7 @@ public class BookServiceImpl implements IBookService {
 		temp.setAverageRating(calculatedRating);
 		return calculatedRating;
 	}
+
 	
 	
 
