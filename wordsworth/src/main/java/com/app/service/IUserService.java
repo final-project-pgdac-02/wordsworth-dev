@@ -1,5 +1,7 @@
 package com.app.service;
 
+import java.util.List;
+
 import com.app.dto.LoginResponse;
 import com.app.pojos.User;
 
@@ -11,5 +13,5 @@ public interface IUserService {
 	String changePassword(Integer userId,String oldPassword,String newPassword);
 	
 	String updateMembership(Integer userId,Integer membershipId); //find membership by membership type then set the membership in user
-	
+
 }

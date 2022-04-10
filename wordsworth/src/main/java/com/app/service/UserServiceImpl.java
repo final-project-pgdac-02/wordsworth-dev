@@ -1,5 +1,7 @@
 package com.app.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +28,7 @@ public class UserServiceImpl implements IUserService {
 	public LoginResponse loginUser(String email, String password) {
 		 User user = userRepo.findByEmailAndPassword(email, password)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Credentials!!!"));
-		 return new LoginResponse(user.getEmail(), user.getFirstName(), user.getRole(), user.getId());
+		 return new LoginResponse(user.getEmail(), user.getFirstName(), user.getLastName() ,user.getRole(), user.getId());
 	}
 
 	@Override
@@ -66,5 +68,10 @@ public class UserServiceImpl implements IUserService {
 		return "membership updated successfully for user : "+updateUserMembership.getEmail();
 
 	}
+
+	
+
+	
+	
 
 }
