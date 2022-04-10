@@ -22,7 +22,7 @@ public class FeedbackController {
 	
 //	@GetMapping("/{id}/feedbacks")
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getSomething(@PathVariable Integer id) {
+	public ResponseEntity<?> getFeedbackByBookId(@PathVariable Integer id) {
 		return new ResponseEntity<>(bookServ.getFeedbackByBookId(id),HttpStatus.OK); 
 	}
 	

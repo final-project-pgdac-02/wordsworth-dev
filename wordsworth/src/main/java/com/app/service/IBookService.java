@@ -15,11 +15,14 @@ public interface IBookService {
 	
 	String updateBookStock(Integer bookId,int stock); //need to implement
 	
-	String updateBookCover(Integer bookId,byte[] bookCover);
+	String updateBookCover(Integer bookId, String bookCover );
 	
 	String updateBookPrice(Integer bookId,double price);
 	
 	List<Feedback> getFeedbackByBookId(Integer bookId);
 	
+	double updateRatingByBookId(Integer bookId); 
+	
 	String addBook(Book book);
+
 }

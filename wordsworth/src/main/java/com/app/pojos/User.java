@@ -1,11 +1,6 @@
 package com.app.pojos;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.persistence.CollectionTable;
 import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -63,10 +58,10 @@ public class User extends BaseEntity {
 //	@JoinTable(name="user_cards" , joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="card_id"))
 //	private Set<Card> cards=new HashSet<Card>();
 
-	@ElementCollection
-	@CollectionTable(name = "cart_items", joinColumns = @JoinColumn(name = "user_id"))
-	//@JsonIgnore //commented JsonIgnore as returning LoginResponse DTO by login user method from UserServiceImpl
-	private List<CartItem> cartItems = new ArrayList<CartItem>();
+//	@ElementCollection
+//	@CollectionTable(name = "cart_items", joinColumns = @JoinColumn(name = "user_id"))
+//	//@JsonIgnore //commented JsonIgnore as returning LoginResponse DTO by login user method from UserServiceImpl
+//	private List<CartItem> cartItems = new ArrayList<CartItem>();
 
 	// HELPER METHODS-------------------------
 
@@ -80,13 +75,13 @@ public class User extends BaseEntity {
 		this.role = role;
 	}
 
-	public void addCartItem(CartItem c) {
-		cartItems.add(c);
-	}
-
-	public void removeCartItem(CartItem c) {
-		cartItems.remove(c);
-	}
+//	public void addCartItem(CartItem c) {
+//		cartItems.add(c);
+//	}
+//
+//	public void removeCartItem(CartItem c) {
+//		cartItems.remove(c);
+//	}
 
 //
 //	public void addCard(Card c) {
@@ -99,13 +94,13 @@ public class User extends BaseEntity {
 
 //	---------------------------------------
 
-	public List<CartItem> getCartItems() {
-		return cartItems;
-	}
-
-	public void setCartItems(List<CartItem> cartItems) {
-		this.cartItems = cartItems;
-	}
+//	public List<CartItem> getCartItems() {
+//		return cartItems;
+//	}
+//
+//	public void setCartItems(List<CartItem> cartItems) {
+//		this.cartItems = cartItems;
+//	}
 
 //	public Set<Card> getCards() {
 //		return cards;

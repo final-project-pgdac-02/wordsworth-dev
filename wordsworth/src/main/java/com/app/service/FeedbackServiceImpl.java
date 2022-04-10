@@ -19,6 +19,9 @@ public class FeedbackServiceImpl implements IFeedbackService {
 
 	@Autowired
 	private FeedbackRepository feedbackRepo;
+	
+	@Autowired
+	private IBookService bookServ;
 
 	@Override
 	public String addFeedback(Integer bookId, Feedback feedback) {
@@ -31,6 +34,13 @@ public class FeedbackServiceImpl implements IFeedbackService {
 
 		return "feedback added for book title : " + book.getBookTitle() + " | feedback is : "
 				+ addedFeedback.getReview();
+	}
+
+	@Override
+	public String updateAllBookRatings() {
+//		bookServ.updateRatingByBookId(null)
+		bookRepo.findAll().forEach(book -> bookServ.updateRatingByBookId(book.getId()));
+		return "All Book Ratings Updated!";
 	}
 
 }
