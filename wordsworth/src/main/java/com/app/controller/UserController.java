@@ -129,6 +129,11 @@ public class UserController {
 		return cardService.addCard(userId, card);
 	}
 	
+	@GetMapping("/getuserdiscount/{userId}")
+	public double getDiscount(@PathVariable Integer userId) {
+		return userService.getUserDiscount(userId);
+	}
+	
 //	@GetMapping("/usercart/{userId}")
 //		public List<UserCartDto> getUserCart(@PathVariable Integer userId){
 //			return userService.getUserCart(userId);

@@ -91,6 +91,12 @@ public class UserServiceImpl implements IUserService {
 		}
 		return userCart;
 	}
+
+	@Override
+	public double getUserDiscount(Integer userId) {
+		User user=userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User by given userId not found in database"));
+		return user.getMembership().getDiscount();
+	}
 	
 
 }

@@ -16,4 +16,6 @@ public interface IUserService {
 	String updateMembership(Integer userId,Integer membershipId); //find membership by membership type then set the membership in user
 	
 	List<UserCartDto> getUserCart(Integer userId);
+	
+	double getUserDiscount(Integer userId);
 }
