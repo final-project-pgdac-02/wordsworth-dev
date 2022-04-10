@@ -1,20 +1,15 @@
 package com.app.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.app.custom_exception.ResourceNotFoundException;
 import com.app.dao.BookRepository;
 import com.app.dao.CartItemRepository;
 import com.app.dao.MembershipRepository;
 import com.app.dao.UserRepository;
-import com.app.dto.CartSummaryDto;
 import com.app.pojos.Book;
 import com.app.pojos.CartItem;
-import com.app.pojos.Membership;
 import com.app.pojos.User;
 
 @Service

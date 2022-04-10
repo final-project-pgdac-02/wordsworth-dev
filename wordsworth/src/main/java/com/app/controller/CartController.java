@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dto.CartSummaryDto;
 import com.app.dto.UserCartDto;
 import com.app.service.ICartItemService;
 import com.app.service.IUserService;
@@ -37,13 +37,13 @@ public class CartController {
 //		return cartItemService.getCartTotalByUserId(userId);
 //	}
 	
-	@PutMapping("/increment/{userId}/{bookId}")
-	public String incrementCartItem(@PathVariable Integer userId, @PathVariable Integer bookId) {
-		return cartItemService.incrementCartItem(userId, bookId);
+	@PutMapping("/increment/{cartId}")
+	public String incrementCartItem(@PathVariable Integer cartId) {
+		return cartItemService.incrementCartItemById(cartId);
 	}
 	
-	@PutMapping("/decrement/{userId}/{bookId}")
-	public double decrementCartItem(@PathVariable Integer userId, @PathVariable Integer bookId) {
-		return cartItemService.decrementCartItem(userId, bookId);
+	@PutMapping("/decrement/{cartId}")
+	public String decrementCartItem(@PathVariable Integer cartId) {
+		return cartItemService.decrementCartItemById(cartId);
 	}
 }
