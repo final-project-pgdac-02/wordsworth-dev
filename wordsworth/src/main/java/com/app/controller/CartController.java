@@ -32,9 +32,9 @@ public class CartController {
 		return userService.getUserCart(userId);
 	}
 	
-	@GetMapping("/getcarttotal/{userId}")
-	public CartSummaryDto getCartTotalByUserId(@PathVariable Integer userId) {
-		return cartItemService.getCartTotalByUserId(userId);
-	}
+//	@GetMapping("/getcarttotal/{userId}")
+//	public CartSummaryDto getCartTotalByUserId(@PathVariable Integer userId) {
+//		return cartItemService.getCartTotalByUserId(userId);
+//	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exception.ResourceNotFoundException;
 import com.app.dao.BookRepository;
+import com.app.dao.CartItemRepository;
 import com.app.dao.MembershipRepository;
 import com.app.dao.UserRepository;
 import com.app.dto.LoginResponse;
@@ -31,6 +32,9 @@ public class UserServiceImpl implements IUserService {
 	
 	@Autowired
 	private BookRepository bookRepo;
+	
+	@Autowired
+	private CartItemRepository cartRepo;
 
 	@Override
 	public LoginResponse loginUser(String email, String password) {
@@ -80,12 +84,11 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public List<UserCartDto> getUserCart(Integer userId) {
 		List<UserCartDto> userCart=new ArrayList<>();
-		List<CartItem> cartItems = userRepo.getById(userId).getCartItems();
+		List<CartItem> cartItems = cartRepo.findByUserId(userId);
 		for(CartItem c: cartItems) {
 			Book temp=bookRepo.findById(c.getBook().getId()).orElseThrow(() -> new ResourceNotFoundException("Couldn't find book by ID!"));
 			userCart.add(new UserCartDto(temp.getId(), userId, c.getQuantity(),temp.getBookCover(),temp.getPrice(), temp.getBookTitle()));
 		}
-		
 		return userCart;
 	}
 	
