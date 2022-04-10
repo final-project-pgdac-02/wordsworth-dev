@@ -118,4 +118,10 @@ public class CartItemServiceImpl implements ICartItemService {
 		return "Quantity set to "+quantity;
 	}
 
+	@Override
+	public String deleteCartItemByCartItemId(Integer cartItemId) {
+		cartRepo.deleteCartItemsByCartItemId(cartItemId);
+		return "Cart Item deleted!!";
+	}
+
 }
