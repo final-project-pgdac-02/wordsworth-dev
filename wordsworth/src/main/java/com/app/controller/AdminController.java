@@ -28,6 +28,4 @@ public class AdminController {
 		return ResponseEntity.ok(bookService.addBook(book));
 	}
 	
-	
-
 }
