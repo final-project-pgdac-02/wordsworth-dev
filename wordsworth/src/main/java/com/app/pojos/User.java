@@ -74,6 +74,8 @@ public class User extends BaseEntity {
 		this.phone = phone;
 		this.role = role;
 	}
+	
+	
 
 //	public void addCartItem(CartItem c) {
 //		cartItems.add(c);

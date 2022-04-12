@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.CartItemDto;
 import com.app.dto.LoginRequest;
+import com.app.dto.UpdateUserDetailsDto;
 import com.app.dto.UpdatedUserDto;
 import com.app.pojos.Address;
 import com.app.pojos.Card;
@@ -124,6 +125,7 @@ public class UserController {
 	public String addACard(@PathVariable Integer userId,@RequestBody Card card) {
 		return cardService.addCard(userId, card);
 	}
+
 	
 	@GetMapping("/getuserdiscount/{userId}")
 	public double getDiscount(@PathVariable Integer userId) {
@@ -144,4 +146,7 @@ public class UserController {
 	public ResponseEntity<?> getUserAddresses(@PathVariable Integer userId){
 		return new ResponseEntity<>(addressService.getAddressListByUserId(userId),HttpStatus.OK);
 	}
+	
+	
+
 }

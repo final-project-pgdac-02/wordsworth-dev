@@ -39,8 +39,10 @@ public class BookServiceImpl implements IBookService {
 		Book temp = bookRepo.findById(bookId)
 				.orElseThrow(() -> new ResourceNotFoundException("Book by given ID not found in database"));
 		temp.setStock(temp.getStock() + stock);
+
 		return "Stock updated to: " + temp.getStock() + " for Book: " + temp.getBookTitle() + " with book id: "
 				+ bookId;
+
 	}
 
 	@Override
@@ -88,7 +90,6 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	@Override
-
 	public List<String> getAllCategories() {
 		return bookRepo.getCategories();
 	}
@@ -97,13 +98,16 @@ public class BookServiceImpl implements IBookService {
 	public String updateBookDetails(Integer bookid, double price,String publication,String isbn,String cover) {
 		Book temp = bookRepo.findById(bookid)
 				.orElseThrow(() -> new ResourceNotFoundException("Book by Given ID not found!"));
+
 		temp.setPrice(price);
 		temp.setPublication(publication);
 		temp.setIsbn(isbn);
 		temp.setBookCover(cover);
-		return "Book Details Updated!!";
+
+		return "Book Details Updated Successfully!!";
 	}
 
+  @Override
 	public List<Book> advancedFilterBooks(String category, String rating, String minPrice, String maxPrice) {
 		Category c = null;
 		Double rat = null;
