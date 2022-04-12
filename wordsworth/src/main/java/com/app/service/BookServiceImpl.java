@@ -84,6 +84,26 @@ public class BookServiceImpl implements IBookService {
 //		return bookRepo.findByBookTitleLike(title);
 		return bookRepo.getBookByTitle(title);
 	}
+	
+	public List<Book> advancedFilterBooks(String category, String rating, String minPrice, String maxPrice) {
+		Category c = null;
+		Double rat = null;
+		Double min = null;
+		Double max = null;
+		if(!category.equals("") ) {
+			c = Category.valueOf(category.toUpperCase());
+		}
+		if(!rating.equals("")) {
+			rat = Double.parseDouble(rating);
+		}
+		if(!minPrice.equals("")) {
+			min = Double.parseDouble(minPrice);
+		}
+		if(!maxPrice.equals("")) {
+			max = Double.parseDouble(maxPrice);
+		}
+		return bookRepo.filterBooks(c, rat, min, max);
+	}
 
 	
 	
