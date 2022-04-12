@@ -88,6 +88,7 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<String> getAllCategories() {
 		return bookRepo.getCategories();
 	}
@@ -102,5 +103,29 @@ public class BookServiceImpl implements IBookService {
 		temp.setBookCover(cover);
 		return "Book Details Updated!!";
 	}
+=======
+	public List<Book> advancedFilterBooks(String category, String rating, String minPrice, String maxPrice) {
+		Category c = null;
+		Double rat = null;
+		Double min = null;
+		Double max = null;
+		if(!category.equals("") ) {
+			c = Category.valueOf(category.toUpperCase());
+		}
+		if(!rating.equals("")) {
+			rat = Double.parseDouble(rating);
+		}
+		if(!minPrice.equals("")) {
+			min = Double.parseDouble(minPrice);
+		}
+		if(!maxPrice.equals("")) {
+			max = Double.parseDouble(maxPrice);
+		}
+		return bookRepo.filterBooks(c, rat, min, max);
+	}
+
+	
+	
+>>>>>>> c0c6cdca93b68087775665b742955f9b7fe9b42f
 
 }
