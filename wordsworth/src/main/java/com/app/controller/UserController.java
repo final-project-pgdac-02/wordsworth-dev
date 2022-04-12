@@ -1,7 +1,5 @@
 package com.app.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.dao.UserRepository;
 import com.app.dto.CartItemDto;
 import com.app.dto.LoginRequest;
+import com.app.dto.UpdateUserDetailsDto;
 import com.app.dto.UpdatedUserDto;
-import com.app.dto.UserCartDto;
 import com.app.pojos.Address;
 import com.app.pojos.Card;
 import com.app.pojos.User;
@@ -128,10 +125,7 @@ public class UserController {
 	public String addACard(@PathVariable Integer userId,@RequestBody Card card) {
 		return cardService.addCard(userId, card);
 	}
-<<<<<<< HEAD
-		
 
-=======
 	
 	@GetMapping("/getuserdiscount/{userId}")
 	public double getDiscount(@PathVariable Integer userId) {
@@ -152,5 +146,7 @@ public class UserController {
 	public ResponseEntity<?> getUserAddresses(@PathVariable Integer userId){
 		return new ResponseEntity<>(addressService.getAddressListByUserId(userId),HttpStatus.OK);
 	}
->>>>>>> 6908824a2a5c02cad514d5fe40e47eb3d022a7ba
+	
+	
+
 }

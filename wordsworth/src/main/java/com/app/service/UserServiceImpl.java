@@ -1,9 +1,7 @@
 package com.app.service;
 
-<<<<<<< HEAD
-=======
 import java.util.ArrayList;
->>>>>>> 6908824a2a5c02cad514d5fe40e47eb3d022a7ba
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exception.ResourceNotFoundException;
 import com.app.dao.BookRepository;
+import com.app.dao.CardRepository;
 import com.app.dao.CartItemRepository;
 import com.app.dao.MembershipRepository;
 import com.app.dao.UserRepository;
@@ -32,23 +31,28 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	private MembershipRepository membershipRepo;
-	
+
 	@Autowired
 	private BookRepository bookRepo;
-	
+
 	@Autowired
 	private CartItemRepository cartRepo;
+	
+	@Autowired
+	private CardRepository cardRepo;
 
 	@Override
 	public LoginResponse loginUser(String email, String password) {
-		 User user = userRepo.findByEmailAndPassword(email, password)
+		User user = userRepo.findByEmailAndPassword(email, password)
 				.orElseThrow(() -> new ResourceNotFoundException("Invalid Credentials!!!"));
-		 return new LoginResponse(user.getEmail(), user.getFirstName(), user.getLastName() ,user.getRole(), user.getId());
+		return new LoginResponse(user.getEmail(), user.getFirstName(), user.getLastName(), user.getRole(),
+				user.getId());
 	}
 
 	@Override
 	public String registerUser(User user) {
-		Membership membership = membershipRepo.findByMembershipType(MembershipType.valueOf("REGULAR")).orElseThrow(() -> new ResourceNotFoundException("This membership does not exist!"));
+		Membership membership = membershipRepo.findByMembershipType(MembershipType.valueOf("REGULAR"))
+				.orElseThrow(() -> new ResourceNotFoundException("This membership does not exist!"));
 		user.setMembership(membership);
 		userRepo.save(user);
 
@@ -77,35 +81,55 @@ public class UserServiceImpl implements IUserService {
 
 		Membership updatedMembership = membershipRepo.findById(membershipId)
 				.orElseThrow(() -> new ResourceNotFoundException("invalid membership id!!!"));
-		
+
 		updateUserMembership.setMembership(updatedMembership);
 
-		return "membership updated successfully for user : "+updateUserMembership.getEmail();
+		return "membership updated successfully for user : " + updateUserMembership.getEmail();
 
 	}
 
-<<<<<<< HEAD
-	
-
-	
-=======
 	@Override
 	public List<UserCartDto> getUserCart(Integer userId) {
-		List<UserCartDto> userCart=new ArrayList<>();
+		List<UserCartDto> userCart = new ArrayList<>();
 		List<CartItem> cartItems = cartRepo.findByUserId(userId);
-		for(CartItem c: cartItems) {
-			Book temp=bookRepo.findById(c.getBook().getId()).orElseThrow(() -> new ResourceNotFoundException("Couldn't find book by ID!"));
-			userCart.add(new UserCartDto(temp.getId(), userId, c.getId(), c.getQuantity(),temp.getBookCover(),temp.getPrice(), temp.getBookTitle()));
+		for (CartItem c : cartItems) {
+			Book temp = bookRepo.findById(c.getBook().getId())
+					.orElseThrow(() -> new ResourceNotFoundException("Couldn't find book by ID!"));
+			userCart.add(new UserCartDto(temp.getId(), userId, c.getId(), c.getQuantity(), temp.getBookCover(),
+					temp.getPrice(), temp.getBookTitle()));
 		}
 		return userCart;
 	}
 
 	@Override
 	public double getUserDiscount(Integer userId) {
-		User user=userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User by given userId not found in database"));
+		User user = userRepo.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User by given userId not found in database"));
 		return user.getMembership().getDiscount();
 	}
->>>>>>> 6908824a2a5c02cad514d5fe40e47eb3d022a7ba
-	
+
+	@Override
+	public List<User> getAllUsers() {
+		// TODO Auto-generated method stub
+		return userRepo.findAll();
+	}
+
+	@Override
+	public String deleteAUser(Integer userId) {
+		// TODO Auto-generated method stub
+		cardRepo.deleteCardByUserId(userId);
+		cartRepo.deleteCartItemsByUserId(userId);
+		userRepo.deleteById(userId);
+		return "user deleted with id : " + userId;
+	}
+
+	@Override
+	public String updateUserDetails(Integer userId, String fName, String lName, String phgoneNumber) {
+		User temp = userRepo.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User ID is Invalid!!"));
+		temp.setFirstName(fName);
+		temp.setLastName(lName);
+		temp.setPhone(phgoneNumber);
+		return "User Profile Updated Succefully!!!";
+	}
 
 }

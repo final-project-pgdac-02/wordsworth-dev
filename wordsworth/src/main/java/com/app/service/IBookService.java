@@ -13,7 +13,9 @@ public interface IBookService {
 	
 	List<Book> getBooksByCategory(String category); //need to implement
 	
-	String updateBookStock(Integer bookId,int stock); //need to implement
+	String updateBookStock(Integer bookId,int stock); 
+	
+	String updateBookDetails(Integer bookid,double price,String publication,String isbn,String cover);
 	
 	String updateBookCover(Integer bookId, String bookCover );
 	

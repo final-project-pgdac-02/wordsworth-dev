@@ -14,12 +14,15 @@ public interface IUserService {
 	String changePassword(Integer userId,String oldPassword,String newPassword);
 	
 	String updateMembership(Integer userId,Integer membershipId); //find membership by membership type then set the membership in user
-<<<<<<< HEAD
 
-=======
-	
 	List<UserCartDto> getUserCart(Integer userId);
 	
 	double getUserDiscount(Integer userId);
->>>>>>> 6908824a2a5c02cad514d5fe40e47eb3d022a7ba
+	
+	List<User> getAllUsers();
+	
+	String deleteAUser(Integer userId);
+	
+	String updateUserDetails(Integer userId,String fName,String lName,String phgoneNumber);
+
 }
