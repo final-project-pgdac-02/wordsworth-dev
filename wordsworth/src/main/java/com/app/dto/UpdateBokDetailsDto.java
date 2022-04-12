@@ -5,7 +5,7 @@ public class UpdateBokDetailsDto {
 	private String publication;
 	private double price;
 	private String isbn;
-	private String bookCover;
+	private String bookCover; 
 	
 	public String getBookCover() {
 		return bookCover;
