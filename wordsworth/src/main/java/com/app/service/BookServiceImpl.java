@@ -39,7 +39,10 @@ public class BookServiceImpl implements IBookService {
 		Book temp = bookRepo.findById(bookId)
 				.orElseThrow(() -> new ResourceNotFoundException("Book by given ID not found in database"));
 		temp.setStock(temp.getStock() + stock);
-		return "Stock updated to: " + stock + " for Book: " + temp.getBookTitle() + " with book id: " + bookId;
+
+		return "Stock updated to: " + temp.getStock() + " for Book: " + temp.getBookTitle() + " with book id: "
+				+ bookId;
+
 	}
 
 	@Override
@@ -69,9 +72,10 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	@Override
-	public String addBook(Book addBook) {
-		bookRepo.save(addBook);
-		return "book added successfully by Title : " + addBook.getBookTitle();
+	public Book addBook(Book addBook) {
+		
+//		"book added successfully by Title : " + addBook.getId();
+		return bookRepo.save(addBook);
 	}
 
 	@Override
@@ -86,13 +90,43 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	@Override
-	public String updateBookDetails(Integer bookid, double price, String publication, String isbn, String cover) {
-		Book temp = bookRepo.findById(bookid).orElseThrow(() -> new ResourceNotFoundException("Book ID is Invalid!!"));
+	public List<String> getAllCategories() {
+		return bookRepo.getCategories();
+	}
+
+	@Override
+	public String updateBookDetails(Integer bookid, double price,String publication,String isbn,String cover) {
+		Book temp = bookRepo.findById(bookid)
+				.orElseThrow(() -> new ResourceNotFoundException("Book by Given ID not found!"));
+
 		temp.setPrice(price);
 		temp.setPublication(publication);
 		temp.setIsbn(isbn);
 		temp.setBookCover(cover);
+
 		return "Book Details Updated Successfully!!";
 	}
+
+  @Override
+	public List<Book> advancedFilterBooks(String category, String rating, String minPrice, String maxPrice) {
+		Category c = null;
+		Double rat = null;
+		Double min = null;
+		Double max = null;
+		if(!category.equals("") ) {
+			c = Category.valueOf(category.toUpperCase());
+		}
+		if(!rating.equals("")) {
+			rat = Double.parseDouble(rating);
+		}
+		if(!minPrice.equals("")) {
+			min = Double.parseDouble(minPrice);
+		}
+		if(!maxPrice.equals("")) {
+			max = Double.parseDouble(maxPrice);
+		}
+		return bookRepo.filterBooks(c, rat, min, max);
+	}
+
 
 }

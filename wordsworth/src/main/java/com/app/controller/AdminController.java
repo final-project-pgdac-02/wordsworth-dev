@@ -3,7 +3,9 @@ package com.app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.app.dto.UpdateBookDetailsDto;
 import com.app.dto.UpdateUserDetailsDto;
+
+import com.app.dto.UpdateBokDetailsDto;
+
 import com.app.pojos.Book;
 import com.app.pojos.User;
 import com.app.service.IBookService;
@@ -39,6 +45,7 @@ public class AdminController {
 		return ResponseEntity.ok(bookService.addBook(book));
 	}
 	
+
 	@GetMapping("/allUsers")
 	public ResponseEntity<?> getListOfAllUsers(){
 		return ResponseEntity.ok(userService.getAllUsers());
@@ -52,16 +59,18 @@ public class AdminController {
 	@PutMapping("/updateUserDetails/{id}")
 	public String updateUserProfile(@PathVariable Integer id,@RequestBody UpdateUserDetailsDto userDto) {
 		return userService.updateUserDetails(id, userDto.getFirstName(), userDto.getLastName(), userDto.getPhone());
+
+	@PutMapping("/{id}/updateBookStock/{stock}")
+	public ResponseEntity<?> updateStock(@PathVariable Integer id, @PathVariable int stock){
+		return ResponseEntity.ok(bookService.updateBookStock(id, stock));
 	}
+			
 	
 	@GetMapping("/getAllBooks")
 	public ResponseEntity<?> getAllBooks(){
 		return ResponseEntity.ok(bookService.getAllBooks());
 	}
-	@PutMapping("/{id}/updateBookStock/{stock}")
-    public ResponseEntity<?> updateStock(@PathVariable Integer id, @PathVariable int stock){
-        return ResponseEntity.ok(bookService.updateBookStock(id, stock));
-    }
+	
 
     @PutMapping("/updateBookDetails/{id}")
     public String updateBookDetails(@PathVariable Integer id,@RequestBody UpdateBookDetailsDto bookDto){
