@@ -1,7 +1,5 @@
 package com.app.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.pojos.Book;
 import com.app.pojos.Feedback;
 import com.app.service.IBookService;
 import com.app.service.IFeedbackService;
@@ -43,5 +40,13 @@ public class BookController {
 	public ResponseEntity<?> addNewFeedback(@PathVariable Integer id, @RequestBody Feedback feedback){
 		return ResponseEntity.ok(feedbackService.addFeedback(id, feedback));
 	}
+	
+	@GetMapping("/categories")
+	public ResponseEntity<?> getAllCategories(){
+		return ResponseEntity.ok(bookServ.getAllCategories());
+	}
+	
+	
+	
 
 }
