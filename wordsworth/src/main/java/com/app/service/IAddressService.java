@@ -11,4 +11,6 @@ public interface IAddressService {
 	
 	List<AddressDto> getAddressListByUserId(Integer userId);
 	
+	String deleteAddressByUserId(Integer userId);
+	
 }

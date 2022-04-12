@@ -41,5 +41,12 @@ public class AddressServiceImpl implements IAddressService {
 		}
 		 return addressList;
 	}
+
+	@Override
+	public String deleteAddressByUserId(Integer userId) {
+		// TODO Auto-generated method stub
+		addressRepo.deleteAddressByUserId(userId);
+		return "address deleted of user id "+userId;
+	}
 	
 }

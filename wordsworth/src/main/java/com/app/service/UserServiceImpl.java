@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exception.ResourceNotFoundException;
+import com.app.dao.AddressRepository;
 import com.app.dao.BookRepository;
 import com.app.dao.CardRepository;
 import com.app.dao.CartItemRepository;
@@ -40,6 +41,9 @@ public class UserServiceImpl implements IUserService {
 	
 	@Autowired
 	private CardRepository cardRepo;
+	
+	@Autowired
+	private AddressRepository addressRepo;
 
 	@Override
 	public LoginResponse loginUser(String email, String password) {
@@ -117,6 +121,7 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public String deleteAUser(Integer userId) {
 		// TODO Auto-generated method stub
+		addressRepo.deleteAddressByUserId(userId);
 		cardRepo.deleteCardByUserId(userId);
 		cartRepo.deleteCartItemsByUserId(userId);
 		userRepo.deleteById(userId);
