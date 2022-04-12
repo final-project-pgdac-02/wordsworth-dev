@@ -48,7 +48,7 @@ public class CartItemServiceImpl implements ICartItemService {
 		
 		double price = book.getPrice();
 
-		c = new CartItem(user, book, 1, price);
+		c = new CartItem(user, book, 1);
 		cartRepo.save(c);
 		message = "Added to cart!";
 

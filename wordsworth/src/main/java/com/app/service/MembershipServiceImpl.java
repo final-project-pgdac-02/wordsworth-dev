@@ -23,12 +23,12 @@ public class MembershipServiceImpl implements IMembershipService {
 		return membershipRepo.findAll();
 	}
 
-	@Override
-	public Membership getMembershipByMembershipId(Integer membershipId) {
-
-		return membershipRepo.findById(membershipId)
-				.orElseThrow(() -> new ResourceNotFoundException("invalid membership id!!!"));
-	}
+//	@Override
+//	public Membership getMembershipByMembershipId(Integer membershipId) {
+//
+//		return membershipRepo.findById(membershipId)
+//				.orElseThrow(() -> new ResourceNotFoundException("invalid membership id!!!"));
+//	}
 
 	@Override
 	public String updateMembershipDiscount(Integer membershipId, double discountPercent) {

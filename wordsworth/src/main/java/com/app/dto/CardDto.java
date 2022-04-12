@@ -12,7 +12,6 @@ public class CardDto {
 	private Type type;
 	private LocalDate expiryDate;
 	
-	
 	public CardDto() {
 		super();
 	}

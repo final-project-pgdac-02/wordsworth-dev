@@ -26,20 +26,20 @@ public class CartItem extends BaseEntity {
 	@Min(value = 1)
 	private int quantity;
 	
-	@Range(min=0)
-	@NotNull
-	@Column(name = "actual_price", precision = 2)
-	private double actualPrice;
-	
-
-	public double getActualPrice() {
-		return actualPrice;
-	}
-
-
-	public void setActualPrice(double actualPrice) {
-		this.actualPrice = actualPrice;
-	}
+//	@Range(min=0)
+//	@NotNull
+//	@Column(name = "actual_price", precision = 2)
+//	private double actualPrice;
+//	
+//
+//	public double getActualPrice() {
+//		return actualPrice;
+//	}
+//
+//
+//	public void setActualPrice(double actualPrice) {
+//		this.actualPrice = actualPrice;
+//	}
 
 
 	public CartItem() {
@@ -50,12 +50,12 @@ public class CartItem extends BaseEntity {
 	
 
 
-	public CartItem(User user, Book book, int quantity, double actualPrice) {
+	public CartItem(User user, Book book, int quantity/* , double actualPrice */) {
 		super();
 		this.user = user;
 		this.book = book;
 		this.quantity = quantity;
-		this.actualPrice = actualPrice;
+//		this.actualPrice = actualPrice;
 	}
 
 
@@ -90,7 +90,7 @@ public class CartItem extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "CartItems [ bookTitle=" + book.getBookTitle() + ", quantity=" + quantity + "actualPrice = "+actualPrice+"]";
+		return "CartItems [ bookTitle=" + book.getBookTitle() + ", quantity=" + quantity + "]";
 	}
 	
 	

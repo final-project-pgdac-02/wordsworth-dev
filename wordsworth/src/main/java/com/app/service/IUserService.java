@@ -7,6 +7,9 @@ import com.app.dto.UserCartDto;
 import com.app.pojos.User;
 
 public interface IUserService {
+	
+	User getUserByUserId(Integer userId);
+	
 	LoginResponse loginUser(String email,String password);
 	
 	String registerUser(User user);//return success or "user by this email already exists please login"

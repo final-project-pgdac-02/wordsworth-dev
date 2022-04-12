@@ -8,7 +8,7 @@ public interface IMembershipService {
 	
 	List<Membership> getAllMemberships();
 	
-	Membership getMembershipByMembershipId(Integer membershipId);
+//	Membership getMembershipByMembershipId(Integer membershipId);
 	
 	String updateMembershipDiscount(Integer membershipId,double discountPercent);
 	

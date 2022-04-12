@@ -43,5 +43,10 @@ public class BookController {
 	public ResponseEntity<?> addNewFeedback(@PathVariable Integer id, @RequestBody Feedback feedback){
 		return ResponseEntity.ok(feedbackService.addFeedback(id, feedback));
 	}
+	
+	@GetMapping("/title/{title}")
+	public ResponseEntity<?> getBooksByTitle(@PathVariable String title) {
+		return ResponseEntity.ok(bookServ.getBookByTitle(title));
+	}
 
 }

@@ -41,5 +41,10 @@ public class AddressServiceImpl implements IAddressService {
 		}
 		 return addressList;
 	}
+
+	@Override
+	public Address getAddressByAddressId(Integer addressId) {
+		return addressRepo.findById(addressId).orElseThrow(()->new ResourceNotFoundException("Address with addressId: "+addressId+ " not found in database"));
+	}
 	
 }

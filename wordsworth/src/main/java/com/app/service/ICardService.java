@@ -9,4 +9,5 @@ public interface ICardService {
 
 	String addCard(Integer userId,Card card);
 	List<CardDto> getCardsByUserId(Integer userId);
+	Card getCardByCardId(Integer cardId);
 }

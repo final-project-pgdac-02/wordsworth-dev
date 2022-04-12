@@ -24,5 +24,7 @@ public interface IBookService {
 	double updateRatingByBookId(Integer bookId); 
 	
 	String addBook(Book book);
+	
+	List<Book> getBookByTitle(String title);
 
 }

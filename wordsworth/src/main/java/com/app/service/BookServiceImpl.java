@@ -79,6 +79,12 @@ public class BookServiceImpl implements IBookService {
 		return calculatedRating;
 	}
 
+	@Override
+	public List<Book> getBookByTitle(String title) {
+//		return bookRepo.findByBookTitleLike(title);
+		return bookRepo.getBookByTitle(title);
+	}
+
 	
 	
 
