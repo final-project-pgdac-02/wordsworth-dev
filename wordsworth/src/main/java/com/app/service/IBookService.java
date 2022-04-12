@@ -16,9 +16,11 @@ public interface IBookService {
 	
 	List<Book> getBooksByCategory(String category); //need to implement
 	
-	String updateBookStock(Integer bookId,int stock); //need to implement
+	String updateBookStock(Integer bookId,int stock);
 	
 	String updateBookCover(Integer bookId, String bookCover );
+	
+	String updateBookDetails(Integer bookid,double price,String publication,String isbn,String cover);
 	
 	String updateBookPrice(Integer bookId,double price);
 	
@@ -26,8 +28,15 @@ public interface IBookService {
 	
 	double updateRatingByBookId(Integer bookId); 
 	
+<<<<<<< HEAD
+	Book addBook(Book book);
+	
+	List<String> getAllCategories();
+	
+=======
 	String addBook(Book book);
 	
 	List<Book> advancedFilterBooks(String category, String rating, String minPrice, String maxPrice);
+>>>>>>> c0c6cdca93b68087775665b742955f9b7fe9b42f
 
 }
