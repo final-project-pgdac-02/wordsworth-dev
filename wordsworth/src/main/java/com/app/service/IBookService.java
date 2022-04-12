@@ -2,6 +2,9 @@ package com.app.service;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.app.pojos.Book;
 import com.app.pojos.Feedback;
 
@@ -24,5 +27,7 @@ public interface IBookService {
 	double updateRatingByBookId(Integer bookId); 
 	
 	String addBook(Book book);
+	
+	List<Book> advancedFilterBooks(String category, String rating, String minPrice, String maxPrice);
 
 }
