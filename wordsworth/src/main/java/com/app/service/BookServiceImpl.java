@@ -88,7 +88,7 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	@Override
-<<<<<<< HEAD
+
 	public List<String> getAllCategories() {
 		return bookRepo.getCategories();
 	}
@@ -103,7 +103,7 @@ public class BookServiceImpl implements IBookService {
 		temp.setBookCover(cover);
 		return "Book Details Updated!!";
 	}
-=======
+
 	public List<Book> advancedFilterBooks(String category, String rating, String minPrice, String maxPrice) {
 		Category c = null;
 		Double rat = null;
@@ -124,8 +124,5 @@ public class BookServiceImpl implements IBookService {
 		return bookRepo.filterBooks(c, rat, min, max);
 	}
 
-	
-	
->>>>>>> c0c6cdca93b68087775665b742955f9b7fe9b42f
 
 }
