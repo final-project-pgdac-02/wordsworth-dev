@@ -1,7 +1,5 @@
 package com.app.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,9 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.app.pojos.Book;
 import com.app.pojos.Feedback;
 import com.app.service.IBookService;
 import com.app.service.IFeedbackService;
@@ -42,6 +40,11 @@ public class BookController {
 	@PostMapping("/addFeedback/{id}")
 	public ResponseEntity<?> addNewFeedback(@PathVariable Integer id, @RequestBody Feedback feedback){
 		return ResponseEntity.ok(feedbackService.addFeedback(id, feedback));
+	}
+	
+	@GetMapping("/advanced")
+	public ResponseEntity<?> advancedSearchBooks(@RequestParam(name="category", required = false) String category,@RequestParam(name="rating", required = false) String rating,@RequestParam(name="min", required = false) String minPrice,@RequestParam(name="max", required = false) String maxPrice){
+		return ResponseEntity.ok(bookServ.advancedFilterBooks(category, rating, minPrice, maxPrice));
 	}
 
 }
