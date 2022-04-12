@@ -30,6 +30,7 @@ public class Membership extends BaseEntity {
 	public Membership() {
 		super();
 	}
+	
 
 	public double getMembershipCost() {
 		return membershipCost;
