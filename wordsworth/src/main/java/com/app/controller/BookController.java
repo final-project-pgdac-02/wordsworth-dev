@@ -42,9 +42,16 @@ public class BookController {
 		return ResponseEntity.ok(feedbackService.addFeedback(id, feedback));
 	}
 	
+
+	@GetMapping("/categories")
+	public ResponseEntity<?> getAllCategories(){
+		return ResponseEntity.ok(bookServ.getAllCategories());
+	}
+	
 	@GetMapping("/advanced")
 	public ResponseEntity<?> advancedSearchBooks(@RequestParam(name="category", required = false) String category,@RequestParam(name="rating", required = false) String rating,@RequestParam(name="min", required = false) String minPrice,@RequestParam(name="max", required = false) String maxPrice){
 		return ResponseEntity.ok(bookServ.advancedFilterBooks(category, rating, minPrice, maxPrice));
 	}
+
 
 }

@@ -48,4 +48,11 @@ public class CardServiceImpl implements ICardService {
 		return cardList;
 	}
 
+	@Override
+	public String deleteAUserCard(Integer userId) {
+		// TODO Auto-generated method stub
+		cardRepo.deleteCardByUserId(userId);
+		return "Card deleted for userId "+ userId;
+	}
+
 }

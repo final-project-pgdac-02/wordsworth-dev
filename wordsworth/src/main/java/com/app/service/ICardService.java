@@ -8,5 +8,8 @@ import com.app.pojos.Card;
 public interface ICardService {
 
 	String addCard(Integer userId,Card card);
+	
 	List<CardDto> getCardsByUserId(Integer userId);
+	
+	String deleteAUserCard(Integer userId);
 }
