@@ -10,5 +10,7 @@ import com.app.pojos.OrderDetail;
 @Repository
 public interface OrderdetailsRepository extends JpaRepository<OrderDetail, Integer>{
 	List<OrderDetail> findAllOrderDetailsByOrderId(int orderId); 
+	
+	List<OrderDetail> findByUserIdOrderByOrderOrderDateDescOrderIdDesc(int userId);
 
 }

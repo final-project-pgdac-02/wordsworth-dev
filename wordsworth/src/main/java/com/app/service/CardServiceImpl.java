@@ -49,6 +49,11 @@ public class CardServiceImpl implements ICardService {
 	}
 
 	@Override
+	public Card getCardByCardId(Integer cardId) {
+		return cardRepo.findById(cardId).orElseThrow(()->new ResourceNotFoundException("Card with cardId: "+cardId+" not found in database"));
+	}
+	
+	@Override
 	public String deleteAUserCard(Integer userId) {
 		// TODO Auto-generated method stub
 		cardRepo.deleteCardByUserId(userId);

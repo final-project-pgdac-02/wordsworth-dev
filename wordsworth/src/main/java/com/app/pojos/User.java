@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
@@ -41,10 +40,6 @@ public class User extends BaseEntity {
 	@NotNull
 	@Column(nullable = false, /* length = 20 */ columnDefinition = "varchar(20) default 'CUSTOMER'")
 	private Role role;
-
-	@Column(name = "profile_picture")
-	@Lob
-	private byte[] profilePicture;
 
 	// Unidirectional Many to One, User(*----->1)Membership
 	@ManyToOne
@@ -170,14 +165,6 @@ public class User extends BaseEntity {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public byte[] getProfilePicture() {
-		return profilePicture;
-	}
-
-	public void setProfilePicture(byte[] profilePicture) {
-		this.profilePicture = profilePicture;
 	}
 
 	@Override
