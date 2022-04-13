@@ -53,5 +53,10 @@ public class BookController {
 		return ResponseEntity.ok(bookServ.advancedFilterBooks(category, rating, minPrice, maxPrice));
 
 	}
+	
+	@GetMapping("/error")
+	public String abc() {
+		return "hellloo";
+	}
 
 }

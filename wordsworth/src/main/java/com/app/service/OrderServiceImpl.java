@@ -115,7 +115,7 @@ public class OrderServiceImpl implements IOrderService {
 		
 		for(CartItem c: userCart) {
 			OrderDetail orderItem=new OrderDetail();
-			orderItem.setPrice(c.getBook().getPrice());
+			orderItem.setPrice(Math.ceil((c.getBook().getPrice()*(100-userDiscount)/100)*100)/100);
 			orderItem.setQuantity(c.getQuantity());
 			orderItem.setShippingDate(null);
 			orderItem.setStatus(ShippingStatus.PENDING);
