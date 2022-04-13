@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.CartItemDto;
 import com.app.dto.LoginRequest;
-import com.app.dto.UpdateUserDetailsDto;
 import com.app.dto.UpdatedUserDto;
 import com.app.pojos.Address;
 import com.app.pojos.Card;
