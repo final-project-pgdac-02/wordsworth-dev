@@ -23,12 +23,12 @@ public class MembershipServiceImpl implements IMembershipService {
 		return membershipRepo.findAll();
 	}
 
-//	@Override
-//	public Membership getMembershipByMembershipId(Integer membershipId) {
-//
-//		return membershipRepo.findById(membershipId)
-//				.orElseThrow(() -> new ResourceNotFoundException("invalid membership id!!!"));
-//	}
+	@Override
+	public Membership getMembershipByMembershipId(Integer membershipId) {
+
+		return membershipRepo.findById(membershipId)
+				.orElseThrow(() -> new ResourceNotFoundException("invalid membership id!!!"));
+	}
 
 	@Override
 	public String updateMembershipDiscount(Integer membershipId, double discountPercent) {
@@ -37,22 +37,27 @@ public class MembershipServiceImpl implements IMembershipService {
 				.orElseThrow(() -> new ResourceNotFoundException("invalid membership id!!!"));
 
 		updateMembershipDiscount.setDiscount(discountPercent);
-		return "discount percentage updated for membership type : " + updateMembershipDiscount.getMembershipType();
+		return "Discount % updated for membership type : " + updateMembershipDiscount.getMembershipType()+" to: "+discountPercent;
 	}
 
 	@Override
-	public String updateDiscountStatus(Integer membershipId) {
+	public String updateDiscountStatus(Integer membershipId, boolean status) {
 
 		Membership updateMembershipDiscountStatus = membershipRepo.findById(membershipId)
 				.orElseThrow(() -> new ResourceNotFoundException("invalid membership id!!!"));
 
-		if (updateMembershipDiscountStatus.isDiscountIsActive()) {
-			updateMembershipDiscountStatus.setDiscountIsActive(false);
-		} else {
-			updateMembershipDiscountStatus.setDiscountIsActive(true);
-		}
+		updateMembershipDiscountStatus.setDiscountIsActive(status);
 		return "updated discount status for membership type : " + updateMembershipDiscountStatus.getMembershipType()
 				+ " to : " + updateMembershipDiscountStatus.isDiscountIsActive();
+	}
+
+	@Override
+	public String updateMembershipCost(Integer membershipId, double membershipCost) {
+		Membership updateMembershipDiscount = membershipRepo.findById(membershipId)
+				.orElseThrow(() -> new ResourceNotFoundException("invalid membership id!!!"));
+
+		updateMembershipDiscount.setMembershipCost(membershipCost);
+		return "Membership cost updated for membership type : " + updateMembershipDiscount.getMembershipType() +" to:  "+membershipCost;
 	}
 
 }
