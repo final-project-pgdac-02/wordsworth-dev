@@ -22,6 +22,7 @@ import com.app.pojos.User;
 import com.app.service.IAddressService;
 import com.app.service.ICardService;
 import com.app.service.ICartItemService;
+import com.app.service.IOrderService;
 import com.app.service.IUserService;
 
 @RestController
@@ -43,6 +44,9 @@ public class UserController {
 	
 	@Autowired
 	private ICardService cardService;
+	
+	@Autowired
+	private IOrderService orderService;
 
 
 //	@PostMapping("/login")
@@ -145,6 +149,11 @@ public class UserController {
 	@GetMapping("/getaddresses/{userId}")
 	public ResponseEntity<?> getUserAddresses(@PathVariable Integer userId){
 		return new ResponseEntity<>(addressService.getAddressListByUserId(userId),HttpStatus.OK);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getAllOrdersByUserId(@PathVariable Integer id){
+		return ResponseEntity.ok(orderService.getOrdersByUserId(id));
 	}
 	
 	
