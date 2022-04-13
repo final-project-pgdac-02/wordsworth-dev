@@ -20,6 +20,13 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 	Optional<Book> findById(Integer id);
 
 	List<Book> findByCategory(Category cat);
+	
+	
+	List<Book> findByBookTitleLike(String bookTitle);
+	
+	@Query("Select b from Book b where b.bookTitle like %:title%")
+	List<Book> getBookByTitle(@Param("title") String title);
+	
 
 	
 	@Modifying

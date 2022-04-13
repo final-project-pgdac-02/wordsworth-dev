@@ -73,7 +73,7 @@ public class BookServiceImpl implements IBookService {
 
 	@Override
 	public Book addBook(Book addBook) {
-		
+
 //		"book added successfully by Title : " + addBook.getId();
 		return bookRepo.save(addBook);
 	}
@@ -90,12 +90,18 @@ public class BookServiceImpl implements IBookService {
 	}
 
 	@Override
+	public List<Book> getBookByTitle(String title) {
+//		return bookRepo.findByBookTitleLike(title);
+		return bookRepo.getBookByTitle(title);
+	}
+
+	@Override
 	public List<String> getAllCategories() {
 		return bookRepo.getCategories();
 	}
 
 	@Override
-	public String updateBookDetails(Integer bookid, double price,String publication,String isbn,String cover) {
+	public String updateBookDetails(Integer bookid, double price, String publication, String isbn, String cover) {
 		Book temp = bookRepo.findById(bookid)
 				.orElseThrow(() -> new ResourceNotFoundException("Book by Given ID not found!"));
 
@@ -107,26 +113,25 @@ public class BookServiceImpl implements IBookService {
 		return "Book Details Updated Successfully!!";
 	}
 
-  @Override
+	@Override
 	public List<Book> advancedFilterBooks(String category, String rating, String minPrice, String maxPrice) {
 		Category c = null;
 		Double rat = null;
 		Double min = null;
 		Double max = null;
-		if(!category.equals("") ) {
+		if (!category.equals("")) {
 			c = Category.valueOf(category.toUpperCase());
 		}
-		if(!rating.equals("")) {
+		if (!rating.equals("")) {
 			rat = Double.parseDouble(rating);
 		}
-		if(!minPrice.equals("")) {
+		if (!minPrice.equals("")) {
 			min = Double.parseDouble(minPrice);
 		}
-		if(!maxPrice.equals("")) {
+		if (!maxPrice.equals("")) {
 			max = Double.parseDouble(maxPrice);
 		}
 		return bookRepo.filterBooks(c, rat, min, max);
 	}
-
 
 }
