@@ -14,6 +14,8 @@ import com.app.dao.BookRepository;
 import com.app.dao.CardRepository;
 import com.app.dao.CartItemRepository;
 import com.app.dao.MembershipRepository;
+import com.app.dao.OrderRepository;
+import com.app.dao.OrderdetailsRepository;
 import com.app.dao.UserRepository;
 import com.app.dto.LoginResponse;
 import com.app.dto.UserCartDto;
@@ -44,6 +46,12 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	private AddressRepository addressRepo;
+	
+	@Autowired
+	private OrderRepository orderRepo;
+	
+	@Autowired
+	private OrderdetailsRepository orderDetailsRepo;
 
 	@Override
 	public LoginResponse loginUser(String email, String password) {
@@ -127,6 +135,8 @@ public class UserServiceImpl implements IUserService {
 	@Override
 	public String deleteAUser(Integer userId) {
 		// TODO Auto-generated method stub
+		orderDetailsRepo.deleteOrderDetailByUserId(userId);
+		orderRepo.deleteOrderByUserId(userId);
 		addressRepo.deleteAddressByUserId(userId);
 		cardRepo.deleteCardByUserId(userId);
 		cartRepo.deleteCartItemsByUserId(userId);

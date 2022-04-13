@@ -3,10 +3,6 @@ package com.app.service;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,12 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.app.custom_exception.InsufficientStockException;
 import com.app.custom_exception.PaymentException;
 import com.app.custom_exception.ResourceNotFoundException;
-import com.app.dao.AddressRepository;
-import com.app.dao.CardRepository;
 import com.app.dao.CartItemRepository;
 import com.app.dao.OrderRepository;
 import com.app.dao.OrderdetailsRepository;
-import com.app.dao.UserRepository;
 import com.app.pojos.Address;
 import com.app.pojos.Book;
 import com.app.pojos.Card;
@@ -128,6 +121,12 @@ public class OrderServiceImpl implements IOrderService {
 		cartItemRepo.deleteCartItemsByUserId(userId);
 		
 		return "order placed with id: " + newOrder.getId();
+	}
+
+	@Override
+	public String deleteOrderByUserId(Integer userId) {
+		orderRepo.deleteOrderByUserId(userId);
+		return "All Order Deleted of userId : " + userId + " Successfully!!";
 	}
 	
 

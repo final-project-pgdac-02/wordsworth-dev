@@ -1,14 +1,10 @@
 package com.app.pojos;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Range;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name="cart_items")
@@ -30,9 +26,6 @@ public class CartItem extends BaseEntity {
 		super();
 	}
 	
-	
-	
-
 
 	public CartItem(User user, Book book, int quantity) {
 		super();
