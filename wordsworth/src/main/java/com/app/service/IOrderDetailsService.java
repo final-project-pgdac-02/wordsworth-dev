@@ -13,5 +13,7 @@ public interface IOrderDetailsService {
 	
 	List<OrderDetailDto> getOrderDetailsByUserId(Integer userId);
 	
+	String deleteOrderDetailByUserId(Integer userId);
+	
 	
 }

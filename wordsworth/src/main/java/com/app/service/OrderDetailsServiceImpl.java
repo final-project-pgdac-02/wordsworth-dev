@@ -62,4 +62,10 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
 		return orderDetailDtoList;
 	}
 
+	@Override
+	public String deleteOrderDetailByUserId(Integer userId) {
+		orderDetailsRepo.deleteOrderDetailByUserId(userId);
+		return "All Order Details Deleted of userId : " + userId + " Successfully!!";
+	}
+
 }

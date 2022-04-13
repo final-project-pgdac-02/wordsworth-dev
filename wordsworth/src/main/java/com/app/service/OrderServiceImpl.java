@@ -129,6 +129,12 @@ public class OrderServiceImpl implements IOrderService {
 		
 		return "order placed with id: " + newOrder.getId();
 	}
+
+	@Override
+	public String deleteOrderByUserId(Integer userId) {
+		orderRepo.deleteOrderByUserId(userId);
+		return "All Order Deleted of userId : " + userId + " Successfully!!";
+	}
 	
 
 }
