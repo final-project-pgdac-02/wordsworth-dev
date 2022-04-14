@@ -1,14 +1,10 @@
 package com.app.pojos;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Range;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
 
 @Entity
 @Table(name="cart_items")
@@ -25,37 +21,17 @@ public class CartItem extends BaseEntity {
 	
 	@Min(value = 1)
 	private int quantity;
-	
-	@Range(min=0)
-	@NotNull
-	@Column(name = "actual_price", precision = 2)
-	private double actualPrice;
-	
-
-	public double getActualPrice() {
-		return actualPrice;
-	}
-
-
-	public void setActualPrice(double actualPrice) {
-		this.actualPrice = actualPrice;
-	}
-
 
 	public CartItem() {
 		super();
 	}
 	
-	
-	
 
-
-	public CartItem(User user, Book book, int quantity, double actualPrice) {
+	public CartItem(User user, Book book, int quantity) {
 		super();
 		this.user = user;
 		this.book = book;
 		this.quantity = quantity;
-		this.actualPrice = actualPrice;
 	}
 
 
@@ -90,7 +66,7 @@ public class CartItem extends BaseEntity {
 
 	@Override
 	public String toString() {
-		return "CartItems [ bookTitle=" + book.getBookTitle() + ", quantity=" + quantity + "actualPrice = "+actualPrice+"]";
+		return "CartItems [ bookTitle=" + book.getBookTitle() + ", quantity=" + quantity + "]";
 	}
 	
 	

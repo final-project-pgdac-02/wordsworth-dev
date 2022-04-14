@@ -33,6 +33,9 @@ public interface IBookService {
 
 //	String addBook(Book book);
 	
+
+	List<Book> getBookByTitle(String title);
+
 	List<Book> advancedFilterBooks(String category, String rating, String minPrice, String maxPrice);
 
 

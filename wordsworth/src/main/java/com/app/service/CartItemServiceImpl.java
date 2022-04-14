@@ -45,10 +45,8 @@ public class CartItemServiceImpl implements ICartItemService {
 				.orElseThrow(() -> new ResourceNotFoundException("User by this ID not found!"));
 		Book book = bookRepo.findById(bookId)
 				.orElseThrow(() -> new ResourceNotFoundException("Book by this ID not found!"));
-		
-		double price = book.getPrice();
 
-		c = new CartItem(user, book, 1, price);
+		c = new CartItem(user, book, 1);
 		cartRepo.save(c);
 		message = "Added to cart!";
 

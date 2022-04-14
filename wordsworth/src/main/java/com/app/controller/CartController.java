@@ -31,11 +31,6 @@ public class CartController {
 		return ResponseEntity.ok().body(userService.getUserCart(userId));
 	}
 	
-//	@GetMapping("/getcarttotal/{userId}")
-//	public CartSummaryDto getCartTotalByUserId(@PathVariable Integer userId) {
-//		return cartItemService.getCartTotalByUserId(userId);
-//	}
-	
 	@PutMapping("/increment/{cartId}")
 	public String incrementCartItem(@PathVariable Integer cartId) {
 		return cartItemService.incrementCartItemById(cartId);
@@ -50,4 +45,5 @@ public class CartController {
 	public String deleteCartItem(@PathVariable Integer cartId) {
 		return cartItemService.deleteCartItemByCartItemId(cartId);
 	}
+	
 }

@@ -47,6 +47,23 @@ public class Order extends BaseEntity {
 	}
 	
 	
+	
+	
+
+	public Order(@FutureOrPresent @NotNull LocalDate orderDate, @Range(min = 0) double orderTotal,
+			@Range(min = 0) double discountedTotal, User user, Address address, Card card) {
+		super();
+		this.orderDate = orderDate;
+		this.orderTotal = orderTotal;
+		this.discountedTotal = discountedTotal;
+		this.user = user;
+		this.address = address;
+		this.card = card;
+	}
+
+
+
+
 
 	public User getUser() {
 		return user;
