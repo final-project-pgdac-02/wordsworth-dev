@@ -119,16 +119,16 @@ public class BookServiceImpl implements IBookService {
 		Double rat = null;
 		Double min = null;
 		Double max = null;
-		if (!category.equals("")) {
+		if (!category.equals("") && (category!=null)) {
 			c = Category.valueOf(category.toUpperCase());
 		}
-		if (!rating.equals("")) {
+		if (!rating.equals("") && (rating!=null)) {
 			rat = Double.parseDouble(rating);
 		}
-		if (!minPrice.equals("")) {
+		if (!minPrice.equals("") && (minPrice!=null)){
 			min = Double.parseDouble(minPrice);
 		}
-		if (!maxPrice.equals("")) {
+		if (!maxPrice.equals("") && (maxPrice!=null)) {
 			max = Double.parseDouble(maxPrice);
 		}
 		return bookRepo.filterBooks(c, rat, min, max);
