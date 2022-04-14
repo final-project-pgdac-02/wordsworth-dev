@@ -23,48 +23,49 @@ import com.app.service.IUserService;
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
 public class AdminController {
-	
+
 	@Autowired
 	IBookService bookService;
-	
+
 	@Autowired
 	IUserService userService;
-	
+
 	@Autowired
 	IFeedbackService feedbackService;
-	
+
 	@PostMapping("/addNewBook")
-	public ResponseEntity<?> addNewBook(@RequestBody Book book){
+	public ResponseEntity<?> addNewBook(@RequestBody Book book) {
 		return ResponseEntity.ok(bookService.addBook(book));
 	}
-	
+
 	@GetMapping("/allUsers")
-	public ResponseEntity<?> getListOfAllUsers(){
+	public ResponseEntity<?> getListOfAllUsers() {
 		return ResponseEntity.ok(userService.getAllUsers());
 	}
-	
+
 	@DeleteMapping("/deleteUser/{userId}")
-	public ResponseEntity<?> deleteUser(@PathVariable Integer userId){
+	public ResponseEntity<?> deleteUser(@PathVariable Integer userId) {
 		return ResponseEntity.ok(userService.deleteAUser(userId));
 	}
 
 	@PutMapping("/updateUserDetails/{id}")
-	public String updateUserProfile(@PathVariable Integer id,@RequestBody UpdateUserDetailsDto userDto) {
+	public String updateUserProfile(@PathVariable Integer id, @RequestBody UpdateUserDetailsDto userDto) {
 		return userService.updateUserDetails(id, userDto.getFirstName(), userDto.getLastName(), userDto.getPhone());
 	}
 
 	@PutMapping("/{id}/updateBookStock/{stock}")
-	public ResponseEntity<?> updateStock(@PathVariable Integer id, @PathVariable int stock){
+	public ResponseEntity<?> updateStock(@PathVariable Integer id, @PathVariable int stock) {
 		return ResponseEntity.ok(bookService.updateBookStock(id, stock));
 	}
-			
+
 	@GetMapping("/getAllBooks")
-	public ResponseEntity<?> getAllBooks(){
+	public ResponseEntity<?> getAllBooks() {
 		return ResponseEntity.ok(bookService.getAllBooks());
 	}
 
-    @PutMapping("/updateBookDetails/{id}")
-    public String updateBookDetails(@PathVariable Integer id,@RequestBody UpdateBookDetailsDto bookDto){
-        return bookService.updateBookDetails(id, bookDto.getPrice(),bookDto.getPublication(),bookDto.getIsbn(),bookDto.getBookCover());
-    }
+	@PutMapping("/updateBookDetails/{id}")
+	public String updateBookDetails(@PathVariable Integer id, @RequestBody UpdateBookDetailsDto bookDto) {
+		return bookService.updateBookDetails(id, bookDto.getPrice(), bookDto.getPublication(), bookDto.getIsbn(),
+				bookDto.getBookCover());
+	}
 }

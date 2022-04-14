@@ -41,24 +41,9 @@ public class User extends BaseEntity {
 	@Column(nullable = false, /* length = 20 */ columnDefinition = "varchar(20) default 'CUSTOMER'")
 	private Role role;
 
-	// Unidirectional Many to One, User(*----->1)Membership
 	@ManyToOne
 	@JoinColumn(name = "membership_id")
 	private Membership membership;
-
-//	@ManyToMany(cascade = {
-//		    CascadeType.PERSIST,
-//		    CascadeType.MERGE
-//		})
-//	@JoinTable(name="user_cards" , joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="card_id"))
-//	private Set<Card> cards=new HashSet<Card>();
-
-//	@ElementCollection
-//	@CollectionTable(name = "cart_items", joinColumns = @JoinColumn(name = "user_id"))
-//	//@JsonIgnore //commented JsonIgnore as returning LoginResponse DTO by login user method from UserServiceImpl
-//	private List<CartItem> cartItems = new ArrayList<CartItem>();
-
-	// HELPER METHODS-------------------------
 
 	public User(String firstName, String lastName, String email, String password, String phone, Role role) {
 		super();
@@ -69,43 +54,6 @@ public class User extends BaseEntity {
 		this.phone = phone;
 		this.role = role;
 	}
-	
-	
-
-//	public void addCartItem(CartItem c) {
-//		cartItems.add(c);
-//	}
-//
-//	public void removeCartItem(CartItem c) {
-//		cartItems.remove(c);
-//	}
-
-//
-//	public void addCard(Card c) {
-//		cards.add(c);
-//	}
-//	
-//	public void removeCard(Card c) {
-//		cards.remove(c);
-//	}
-
-//	---------------------------------------
-
-//	public List<CartItem> getCartItems() {
-//		return cartItems;
-//	}
-//
-//	public void setCartItems(List<CartItem> cartItems) {
-//		this.cartItems = cartItems;
-//	}
-
-//	public Set<Card> getCards() {
-//		return cards;
-//	}
-//
-//	public void setCards(Set<Card> cards) {
-//		this.cards = cards;
-//	}
 
 	public User() {
 		super();

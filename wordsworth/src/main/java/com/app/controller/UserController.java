@@ -28,48 +28,26 @@ import com.app.service.IUserService;
 
 @RestController
 @RequestMapping("/user")
-
-
 @CrossOrigin(origins = "http://localhost:3000/")
-
 public class UserController {
 
 	@Autowired
 	private IUserService userService;
-	
+
 	@Autowired
 	private ICartItemService cartItemServ;
-	
+
 	@Autowired
 	private IAddressService addressService;
-	
+
 	@Autowired
 	private ICardService cardService;
-	
+
 	@Autowired
 	private IOrderService orderService;
-	
+
 	@Autowired
 	private IMembershipService membershipService;
-
-
-//	@PostMapping("/login")
-//	public ResponseEntity<?> processLoginForm(@RequestBody LoginRequest request) {
-//		User loggedInUser = userService.loginUser(request.getEmail(), request.getPassword());
-//
-//		if (loggedInUser.getRole() == Role.ADMIN) {
-//			return new ResponseEntity<>(loggedInUser, HttpStatus.OK);
-//		} else {
-//			return new ResponseEntity<>(loggedInUser, HttpStatus.OK);
-//		}
-//	}
-
-//	@PostMapping("/login")
-//	public ResponseEntity<?> processLoginForm(@RequestBody LoginRequest request) {
-//		System.out.println(request.getEmail() + " " + request.getPassword());
-//		return ResponseEntity.ok(userService.loginUser(request.getEmail(), request.getPassword()));
-//	}
-	
 
 	@PostMapping("/login")
 	public ResponseEntity<?> processLoginForm(@RequestBody LoginRequest request) {
@@ -82,26 +60,6 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(userService.registerUser(user));
 
 	}
-
-
-//	@GetMapping("/test/{id}")
-//	public ResponseEntity<UserDto> testLogin(@PathVariable Integer id) {
-//		User userObject = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("user not found!!!"));
-//		UserDto userDtoObject = new UserDto(userObject.getFirstName(), userObject.getLastName(), userObject.getEmail(),
-//				userObject.getPassword());
-//
-//		return ResponseEntity.ok(userDtoObject);
-//	}
-
-	// @GetMapping("/test/{id}")
-	// public ResponseEntity<UserDto> testLogin(@PathVariable Integer id) {
-	// 	User userObject = userRepo.findById(id).orElseThrow(() -> new ResourceNotFoundException("user not found!!!"));
-	// 	UserDto userDtoObject = new UserDto(userObject.getFirstName(), userObject.getLastName(), userObject.getEmail(),
-	// 			userObject.getPassword());
-
-	// 	return ResponseEntity.ok(userDtoObject);
-	// }
-
 
 	@PutMapping("/changepassword")
 	public String changedUserPassword(@RequestBody UpdatedUserDto updatedUser) {
@@ -118,61 +76,49 @@ public class UserController {
 
 		return userService.updateMembership(updatedMembershipOfUser.getId(), membershipId);
 	}
-	
+
 	@PutMapping("/upgrademembership")
 	public String upgradeMembership(@RequestBody UpgradeMemberShipDto upgradeDto) {
 		return userService.updateMembership(upgradeDto.getUserId(), upgradeDto.getMembershipId());
 	}
-	
+
 	@PostMapping("/addtocart")
 	public String saveItemToCart(@RequestBody CartItemDto cartItem) {
 		return cartItemServ.saveToCart(cartItem.getUserId(), cartItem.getBookId());
 	}
-	
+
 	@PostMapping("/addanaddress/{userId}")
-	public String addAnAddress( @PathVariable Integer userId,@RequestBody Address addedAddress) {		
+	public String addAnAddress(@PathVariable Integer userId, @RequestBody Address addedAddress) {
 		return addressService.addAddress(userId, addedAddress);
 	}
-	
+
 	@PostMapping("/addacard/{userId}")
-	public String addACard(@PathVariable Integer userId,@RequestBody Card card) {
+	public String addACard(@PathVariable Integer userId, @RequestBody Card card) {
 		return cardService.addCard(userId, card);
 	}
 
-	
 	@GetMapping("/getuserdiscount/{userId}")
 	public double getDiscount(@PathVariable Integer userId) {
 		return userService.getUserDiscount(userId);
 	}
-	
-//	@GetMapping("/usercart/{userId}")
-//		public List<UserCartDto> getUserCart(@PathVariable Integer userId){
-//			return userService.getUserCart(userId);
-//		}
-	
+
 	@GetMapping("/getcards/{userId}")
-	public ResponseEntity<?> getUserCards(@PathVariable Integer userId){
-		return new ResponseEntity<>(cardService.getCardsByUserId(userId),HttpStatus.OK);
+	public ResponseEntity<?> getUserCards(@PathVariable Integer userId) {
+		return new ResponseEntity<>(cardService.getCardsByUserId(userId), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/getaddresses/{userId}")
-	public ResponseEntity<?> getUserAddresses(@PathVariable Integer userId){
-		return new ResponseEntity<>(addressService.getAddressListByUserId(userId),HttpStatus.OK);
+	public ResponseEntity<?> getUserAddresses(@PathVariable Integer userId) {
+		return new ResponseEntity<>(addressService.getAddressListByUserId(userId), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getAllOrdersByUserId(@PathVariable Integer id){
+	public ResponseEntity<?> getAllOrdersByUserId(@PathVariable Integer id) {
 		return ResponseEntity.ok(orderService.getOrdersByUserId(id));
 	}
-	
 
 	@GetMapping("/membership/{userId}")
-	public ResponseEntity<?> getMembershipByUserId(@PathVariable Integer userId){
+	public ResponseEntity<?> getMembershipByUserId(@PathVariable Integer userId) {
 		return ResponseEntity.ok(membershipService.getMemberhsipByUserId(userId));
 	}
-	
-	
-	
-	
-
 }

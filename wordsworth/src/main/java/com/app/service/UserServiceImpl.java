@@ -46,10 +46,10 @@ public class UserServiceImpl implements IUserService {
 
 	@Autowired
 	private AddressRepository addressRepo;
-	
+
 	@Autowired
 	private OrderRepository orderRepo;
-	
+
 	@Autowired
 	private OrderdetailsRepository orderDetailsRepo;
 
@@ -128,13 +128,11 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public List<User> getAllUsers() {
-		// TODO Auto-generated method stub
 		return userRepo.findAll();
 	}
 
 	@Override
 	public String deleteAUser(Integer userId) {
-		// TODO Auto-generated method stub
 		orderDetailsRepo.deleteOrderDetailByUserId(userId);
 		orderRepo.deleteOrderByUserId(userId);
 		addressRepo.deleteAddressByUserId(userId);

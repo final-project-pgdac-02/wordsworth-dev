@@ -14,13 +14,15 @@ import com.app.pojos.CartItem;
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Integer> {
 	List<CartItem> findByUserId(Integer userId);
+
 	Optional<CartItem> findById(Integer id);
-	Optional<CartItem> findByUserIdAndBookId(Integer userId,Integer bookId);
-	
+
+	Optional<CartItem> findByUserIdAndBookId(Integer userId, Integer bookId);
+
 	@Modifying
 	@Query("delete from CartItem c where c.user.id=:id")
 	void deleteCartItemsByUserId(@Param("id") Integer userId);
-	
+
 	@Modifying
 	@Query("delete from CartItem c where c.id=:id")
 	void deleteCartItemsByCartItemId(@Param("id") Integer cartItemId);

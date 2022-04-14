@@ -5,7 +5,7 @@ public class UpdatedUserDto {
 	private int id;
 	private String oldPassword;
 	private String newPassword;
-	
+
 	public UpdatedUserDto() {
 		super();
 	}
@@ -33,7 +33,5 @@ public class UpdatedUserDto {
 	public void setNewPassword(String newPassword) {
 		this.newPassword = newPassword;
 	}
-	
-	
-	
+
 }

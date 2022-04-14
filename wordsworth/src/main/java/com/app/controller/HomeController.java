@@ -18,31 +18,14 @@ public class HomeController {
 
 	@Autowired
 	IBookService bookServ;
-	
-	
+
 	@Autowired
 	IOrderService orderServ;
-	
+
 	@GetMapping("/")
 	public ResponseEntity<?> getAllBooks() {
-//		return bookServ.getAllBooks().toString();
-//		return new ResponseEntity<>(bookServ.getAllBooks(),HttpStatus.OK);
-			return new ResponseEntity<>(bookServ.getAllBooks(),HttpStatus.OK);
+
+		return new ResponseEntity<>(bookServ.getAllBooks(), HttpStatus.OK);
 	}
-	
-	
-//	@GetMapping("/test/{id}")
-//	public ResponseEntity<?> getSomething(@PathVariable Integer id) {
-//		return new ResponseEntity<>(bookServ.getFeedbackByBookId(id),HttpStatus.OK); 
-//	}
-	
-//	@GetMapping("/{id}")
-//	public ResponseEntity<?> getBookById(@PathVariable int id){
-//		return new ResponseEntity<>(bookServ.getBookById(id),HttpStatus.OK);
-//	}
-//	
-//	@GetMapping("/name/{name}/{category}")
-//	public ResponseEntity<?> getBookByName(@PathVariable String name,@PathVariable String category){
-//		return new ResponseEntity<>(name+category,HttpStatus.OK);
-//	}
+
 }
