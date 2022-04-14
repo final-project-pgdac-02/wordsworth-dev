@@ -15,4 +15,6 @@ public interface IMembershipService {
 	String updateDiscountStatus(Integer membershipId, boolean status); //get membership by id and flip status -> return flipped status as string
 	
 	String updateMembershipCost(Integer membershipId,double membershipCost);
+	
+	Membership getMemberhsipByUserId(Integer userId);
 }

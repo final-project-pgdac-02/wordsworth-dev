@@ -27,14 +27,14 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
 	}
 
 	@Override
-	public OrderDetail updateShippingStatus(Integer orderDetailId, ShippingStatus shippingStatus) {
+	public String updateShippingStatus(Integer orderDetailId, ShippingStatus shippingStatus) {
 
 		OrderDetail orderDetailsObject = orderDetailsRepo.findById(orderDetailId)
-				.orElseThrow(() -> new ResourceNotFoundException("order details not found by this id!!!"));
+				.orElseThrow(() -> new ResourceNotFoundException("Given item with order detail id: "+orderDetailId+" not found in database!!"));
 
 		orderDetailsObject.setStatus(shippingStatus);
 
-		return orderDetailsObject;
+		return "Shipping Status for Order Detail with id: "+orderDetailId+" has been updated to: "+shippingStatus.toString();
 	}
 
 	@Override
@@ -60,6 +60,19 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
 		}
 		
 		return orderDetailDtoList;
+	}
+
+	@Override
+	public String deleteOrderDetailByUserId(Integer userId) {
+		orderDetailsRepo.deleteOrderDetailByUserId(userId);
+		return "All Order Details Deleted of userId : " + userId + " Successfully!!";
+	}
+
+	@Override
+	public String getShippingStatusByOrderDetailId(Integer orderDetailId) {
+		// TODO Auto-generated method stub
+		OrderDetail orderDetail= orderDetailsRepo.findById(orderDetailId).orElseThrow(()->new ResourceNotFoundException("OrderDetail with id: "+orderDetailId+" not found in database!!"));
+		return orderDetail.getStatus().toString();
 	}
 
 }

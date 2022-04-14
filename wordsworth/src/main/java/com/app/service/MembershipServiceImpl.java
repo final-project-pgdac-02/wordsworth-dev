@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.app.custom_exception.ResourceNotFoundException;
 import com.app.dao.MembershipRepository;
+import com.app.dao.UserRepository;
 import com.app.pojos.Membership;
+import com.app.pojos.User;
 
 @Service
 @Transactional
@@ -16,6 +18,9 @@ public class MembershipServiceImpl implements IMembershipService {
 
 	@Autowired
 	private MembershipRepository membershipRepo;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	@Override
 	public List<Membership> getAllMemberships() {
@@ -60,4 +65,11 @@ public class MembershipServiceImpl implements IMembershipService {
 		return "Membership cost updated for membership type : " + updateMembershipDiscount.getMembershipType() +" to:  "+membershipCost;
 	}
 
+	@Override
+	public Membership getMemberhsipByUserId(Integer userId) {
+		User user=userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User with user id: "+userId+" not found in database!!"));
+		return user.getMembership();
+	}
+
+	
 }

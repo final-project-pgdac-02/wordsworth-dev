@@ -14,14 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.CartItemDto;
 import com.app.dto.LoginRequest;
-import com.app.dto.UpdateUserDetailsDto;
 import com.app.dto.UpdatedUserDto;
+import com.app.dto.UpgradeMemberShipDto;
 import com.app.pojos.Address;
 import com.app.pojos.Card;
 import com.app.pojos.User;
 import com.app.service.IAddressService;
 import com.app.service.ICardService;
 import com.app.service.ICartItemService;
+import com.app.service.IMembershipService;
+import com.app.service.IOrderService;
 import com.app.service.IUserService;
 
 @RestController
@@ -43,6 +45,12 @@ public class UserController {
 	
 	@Autowired
 	private ICardService cardService;
+	
+	@Autowired
+	private IOrderService orderService;
+	
+	@Autowired
+	private IMembershipService membershipService;
 
 
 //	@PostMapping("/login")
@@ -111,6 +119,11 @@ public class UserController {
 		return userService.updateMembership(updatedMembershipOfUser.getId(), membershipId);
 	}
 	
+	@PutMapping("/upgrademembership")
+	public String upgradeMembership(@RequestBody UpgradeMemberShipDto upgradeDto) {
+		return userService.updateMembership(upgradeDto.getUserId(), upgradeDto.getMembershipId());
+	}
+	
 	@PostMapping("/addtocart")
 	public String saveItemToCart(@RequestBody CartItemDto cartItem) {
 		return cartItemServ.saveToCart(cartItem.getUserId(), cartItem.getBookId());
@@ -145,6 +158,16 @@ public class UserController {
 	@GetMapping("/getaddresses/{userId}")
 	public ResponseEntity<?> getUserAddresses(@PathVariable Integer userId){
 		return new ResponseEntity<>(addressService.getAddressListByUserId(userId),HttpStatus.OK);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<?> getAllOrdersByUserId(@PathVariable Integer id){
+		return ResponseEntity.ok(orderService.getOrdersByUserId(id));
+	}
+	
+	@GetMapping("/membership/{userId}")
+	public ResponseEntity<?> getMembershipByUserId(@PathVariable Integer userId){
+		return ResponseEntity.ok(membershipService.getMemberhsipByUserId(userId));
 	}
 	
 	
