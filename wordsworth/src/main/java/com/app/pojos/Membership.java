@@ -8,29 +8,26 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="memberships")
+@Table(name = "memberships")
 public class Membership extends BaseEntity {
-	
-	@Column(name="membership_type", unique = true, nullable = false, length=35)
+
+	@Column(name = "membership_type", unique = true, nullable = false, length = 35)
 	@Enumerated(EnumType.STRING)
 	@NotNull
 	private MembershipType membershipType;
-	
 
 	@Column(precision = 2)
 	private double discount;
-	
-	@Column(name="discount_is_active", columnDefinition = "boolean default false")
+
+	@Column(name = "discount_is_active", columnDefinition = "boolean default false")
 	private boolean discountIsActive;
-	
-	@Column(precision = 2,name="membership_cost")
+
+	@Column(precision = 2, name = "membership_cost")
 	private double membershipCost;
-	
 
 	public Membership() {
 		super();
 	}
-	
 
 	public double getMembershipCost() {
 		return membershipCost;
@@ -69,6 +66,5 @@ public class Membership extends BaseEntity {
 		return "Membership [membershipType=" + membershipType + ", discount=" + discount + ", discountIsActive="
 				+ discountIsActive + "]";
 	}
-	
-	
+
 }

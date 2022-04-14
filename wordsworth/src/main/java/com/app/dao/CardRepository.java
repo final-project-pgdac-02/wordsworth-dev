@@ -12,7 +12,7 @@ import com.app.pojos.Card;
 @Repository
 public interface CardRepository extends JpaRepository<Card, Integer> {
 	List<Card> findByUserId(Integer userId);
-	
+
 	@Modifying
 	@Query("delete from Card c where c.user.id=:id")
 	void deleteCardByUserId(@Param("id") Integer userId);

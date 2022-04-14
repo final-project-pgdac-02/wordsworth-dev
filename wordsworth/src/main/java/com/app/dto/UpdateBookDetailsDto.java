@@ -5,7 +5,7 @@ public class UpdateBookDetailsDto {
 	private double price;
 	private String isbn;
 	private String bookCover;
-	
+
 	public UpdateBookDetailsDto() {
 		super();
 	}
@@ -41,6 +41,5 @@ public class UpdateBookDetailsDto {
 	public void setBookCover(String bookCover) {
 		this.bookCover = bookCover;
 	}
-	
 
 }

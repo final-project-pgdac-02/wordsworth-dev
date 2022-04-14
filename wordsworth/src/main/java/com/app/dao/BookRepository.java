@@ -20,21 +20,20 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 	Optional<Book> findById(Integer id);
 
 	List<Book> findByCategory(Category cat);
-	
-	
+
 	List<Book> findByBookTitleLike(String bookTitle);
-	
+
 	@Query("Select b from Book b where b.bookTitle like %:title%")
 	List<Book> getBookByTitle(@Param("title") String title);
-	
 
-	
 	@Modifying
 	@Query("select Distinct(b.category) from Book b")
 	List<String> getCategories();
 
-
-	@Query("select b from Book b where "+"(b.category=:cat or :cat is null) and"+"(b.averageRating >= :rat or :rat is null) and"+"(b.price >= :min or :min is null) and"+"(b.price <= :max or :max is null)")
-	List<Book> filterBooks(@Param("cat") Category category, @Param("rat") Double rating,@Param("min") Double minPrice,@Param("max") Double maxPrice);
+	@Query("select b from Book b where " + "(b.category=:cat or :cat is null) and"
+			+ "(b.averageRating >= :rat or :rat is null) and" + "(b.price >= :min or :min is null) and"
+			+ "(b.price <= :max or :max is null)")
+	List<Book> filterBooks(@Param("cat") Category category, @Param("rat") Double rating, @Param("min") Double minPrice,
+			@Param("max") Double maxPrice);
 
 }

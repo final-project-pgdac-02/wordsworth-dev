@@ -91,8 +91,6 @@ public class Book extends BaseEntity {
 		this.category = category;
 	}
 
-	
-
 	public String getBookCover() {
 		return bookCover;
 	}

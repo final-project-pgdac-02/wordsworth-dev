@@ -16,41 +16,36 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="cards")
+@Table(name = "cards")
 public class Card extends BaseEntity {
-	
+
 	@Column(length = 50)
 	@NotBlank
 	private String cardHolderName;
-	
-	@Column(nullable = false,length=16)
+
+	@Column(nullable = false, length = 16)
 	@NotBlank
-	@Length(min=16,max=16)
+	@Length(min = 16, max = 16)
 	private String cardNumber;
-	
+
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(length = 30)
 	private Type type;
-	
+
 	@NotNull
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate expiryDate;
-	
-	
+
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
-	
+
 	public Card() {
 		super();
 	}
-	
-	
-	
 
-	public Card(String cardHolderName,  String cardNumber,
-			 Type type, LocalDate expiryDate) {
+	public Card(String cardHolderName, String cardNumber, Type type, LocalDate expiryDate) {
 		super();
 		this.cardHolderName = cardHolderName;
 		this.cardNumber = cardNumber;
@@ -58,34 +53,21 @@ public class Card extends BaseEntity {
 		this.expiryDate = expiryDate;
 	}
 
-
-
-
 	public String getCardHolderName() {
 		return cardHolderName;
 	}
-
 
 	public void setCardHolderName(String cardName) {
 		this.cardHolderName = cardName;
 	}
 
-
-
-
 	public User getUser() {
 		return user;
 	}
 
-
-
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
-
-
 
 	public String getCardNumber() {
 		return cardNumber;
@@ -111,15 +93,10 @@ public class Card extends BaseEntity {
 		this.expiryDate = expiryDate;
 	}
 
-
-
 	@Override
 	public String toString() {
-		return "Card [cardHolderName = "+cardHolderName+" cardNumber=" + cardNumber + ", type=" + type
-				+ ", expiryDate=" + expiryDate + " userEmail:" + user.getEmail()+"]";
+		return "Card [cardHolderName = " + cardHolderName + " cardNumber=" + cardNumber + ", type=" + type
+				+ ", expiryDate=" + expiryDate + " userEmail:" + user.getEmail() + "]";
 	}
-	
-	
-	
-	
+
 }

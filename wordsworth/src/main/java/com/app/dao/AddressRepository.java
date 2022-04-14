@@ -13,7 +13,7 @@ import com.app.pojos.Address;
 @Repository
 public interface AddressRepository extends JpaRepository<Address, Integer> {
 	List<Address> findByUserId(Integer userId);
-	
+
 	@Modifying
 	@Query("delete from Address a where a.user.id=:id")
 	void deleteAddressByUserId(@Param("id") Integer userId);

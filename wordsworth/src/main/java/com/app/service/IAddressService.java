@@ -7,11 +7,12 @@ import com.app.pojos.Address;
 
 public interface IAddressService {
 
-	String addAddress(Integer userId,Address address);
-	
+	String addAddress(Integer userId, Address address);
+
 	List<AddressDto> getAddressListByUserId(Integer userId);
-	
+
 	Address getAddressByAddressId(Integer addressId);
+
 	String deleteAddressByUserId(Integer userId);
-	
+
 }

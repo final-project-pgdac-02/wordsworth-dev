@@ -11,11 +11,11 @@ import org.springframework.stereotype.Repository;
 import com.app.pojos.OrderDetail;
 
 @Repository
-public interface OrderdetailsRepository extends JpaRepository<OrderDetail, Integer>{
-	List<OrderDetail> findAllOrderDetailsByOrderId(int orderId); 
-	
+public interface OrderdetailsRepository extends JpaRepository<OrderDetail, Integer> {
+	List<OrderDetail> findAllOrderDetailsByOrderId(int orderId);
+
 	List<OrderDetail> findByUserIdOrderByOrderOrderDateDescOrderIdDesc(int userId);
-	
+
 	@Modifying
 	@Query("delete from OrderDetail od where od.user.id=:id")
 	void deleteOrderDetailByUserId(@Param("id") Integer userId);

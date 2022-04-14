@@ -4,7 +4,7 @@ public class UpdateUserDetailsDto {
 	private String firstName;
 	private String lastName;
 	private String phone;
-	
+
 	public UpdateUserDetailsDto() {
 		super();
 	}
@@ -32,5 +32,5 @@ public class UpdateUserDetailsDto {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	
+
 }

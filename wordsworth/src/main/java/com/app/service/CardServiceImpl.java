@@ -17,19 +17,20 @@ import com.app.pojos.User;
 @Service
 @Transactional
 public class CardServiceImpl implements ICardService {
-	
+
 	@Autowired
 	CardRepository cardRepo;
-	
+
 	@Autowired
 	UserRepository userRepo;
 
 	@Override
 	public String addCard(Integer userId, Card card) {
-		User temp= userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User by the given ID does not exist in database"));
+		User temp = userRepo.findById(userId)
+				.orElseThrow(() -> new ResourceNotFoundException("User by the given ID does not exist in database"));
 		card.setUser(temp);
 		cardRepo.save(card);
-		return "Card "+card.getCardHolderName()+" added successfully for user with email: "+temp.getEmail();
+		return "Card " + card.getCardHolderName() + " added successfully for user with email: " + temp.getEmail();
 	}
 
 	@Override
@@ -50,14 +51,14 @@ public class CardServiceImpl implements ICardService {
 
 	@Override
 	public Card getCardByCardId(Integer cardId) {
-		return cardRepo.findById(cardId).orElseThrow(()->new ResourceNotFoundException("Card with cardId: "+cardId+" not found in database"));
+		return cardRepo.findById(cardId).orElseThrow(
+				() -> new ResourceNotFoundException("Card with cardId: " + cardId + " not found in database"));
 	}
-	
+
 	@Override
 	public String deleteAUserCard(Integer userId) {
-		// TODO Auto-generated method stub
 		cardRepo.deleteCardByUserId(userId);
-		return "Card deleted for userId "+ userId;
+		return "Card deleted for userId " + userId;
 	}
 
 }

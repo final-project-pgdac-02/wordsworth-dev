@@ -1,6 +1,5 @@
 package com.app.dto;
 
-
 public class AddressDto {
 	public Integer addressId;
 	private String detailedAddress;
@@ -9,8 +8,7 @@ public class AddressDto {
 	private String state;
 	private String country;
 	private String pinCode;
-		
-	
+
 	public AddressDto() {
 		super();
 	}
