@@ -155,6 +155,4 @@ public class UserController {
 		return ResponseEntity.ok(orderService.getOrdersByUserId(id));
 	}
 	
-	
-
 }
