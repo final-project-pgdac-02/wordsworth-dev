@@ -165,10 +165,13 @@ public class UserController {
 		return ResponseEntity.ok(orderService.getOrdersByUserId(id));
 	}
 	
+
 	@GetMapping("/membership/{userId}")
 	public ResponseEntity<?> getMembershipByUserId(@PathVariable Integer userId){
 		return ResponseEntity.ok(membershipService.getMemberhsipByUserId(userId));
 	}
+	
+	
 	
 	
 
