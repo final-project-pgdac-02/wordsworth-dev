@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
 						"Given item with order detail id: " + orderDetailId + " not found in database!!"));
 
 		orderDetailsObject.setStatus(shippingStatus);
+		if(shippingStatus==ShippingStatus.SHIPPED)
+			orderDetailsObject.setShippingDate(LocalDate.now());
 
 		return "Shipping Status for Order Detail with id: " + orderDetailId + " has been updated to: "
 				+ shippingStatus.toString();
