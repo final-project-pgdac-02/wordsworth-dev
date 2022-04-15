@@ -14,18 +14,14 @@ import com.app.service.IBookService;
 @RestController
 @RequestMapping("/feedbacks")
 @CrossOrigin(origins = "http://localhost:3000/")
-
 public class FeedbackController {
-	
+
 	@Autowired
 	IBookService bookServ;
-	
-//	@GetMapping("/{id}/feedbacks")
+
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getFeedbackByBookId(@PathVariable Integer id) {
-		return new ResponseEntity<>(bookServ.getFeedbackByBookId(id),HttpStatus.OK); 
+		return new ResponseEntity<>(bookServ.getFeedbackByBookId(id), HttpStatus.OK);
 	}
-	
-	
 
 }

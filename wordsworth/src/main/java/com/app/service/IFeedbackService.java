@@ -4,7 +4,7 @@ import com.app.pojos.Feedback;
 
 public interface IFeedbackService {
 
-	String addFeedback(Integer bookId,Feedback feedback); //fetch book by id and feedback.setBook(book)
-	
+	String addFeedback(Integer bookId, Feedback feedback);
+
 	String updateAllBookRatings();
 }

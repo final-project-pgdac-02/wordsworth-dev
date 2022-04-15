@@ -15,26 +15,26 @@ import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="order_details")
+@Table(name = "order_details")
 public class OrderDetail extends BaseEntity {
-	
-	@Range(min=1)
+
+	@Range(min = 1)
 	@NotNull
 	private int quantity;
-	
+
 	@Enumerated(EnumType.STRING)
-	@Column(name="shipping_status", columnDefinition = "varchar(45) default 'PENDING'")
+	@Column(name = "shipping_status", columnDefinition = "varchar(45) default 'PENDING'")
 	private ShippingStatus status;
-	
-	@Range(min=0)
+
+	@Range(min = 0)
 	@NotNull
 	@Column(name = "price", precision = 2)
 	private double price;
-	
+
 	@Column(name = "shipping_date")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate shippingDate;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "order_id")
 	private Order order;
@@ -42,7 +42,7 @@ public class OrderDetail extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "book_id")
 	private Book book;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -50,9 +50,9 @@ public class OrderDetail extends BaseEntity {
 	public OrderDetail() {
 		super();
 	}
-	
+
 	{
-		status=ShippingStatus.PENDING;
+		status = ShippingStatus.PENDING;
 	}
 
 	public User getUser() {
@@ -116,5 +116,5 @@ public class OrderDetail extends BaseEntity {
 		return "OrderDetail [quantity=" + quantity + ", status=" + status + ", price=" + price + ", shippingDate="
 				+ shippingDate + "]";
 	}
-	
+
 }

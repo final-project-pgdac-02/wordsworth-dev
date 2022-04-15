@@ -19,30 +19,23 @@ import com.app.service.IFeedbackService;
 @RestController
 @RequestMapping("/books")
 @CrossOrigin(origins = "http://localhost:3000/")
-//@CrossOrigin(origins = "*")
 public class BookController {
-	
+
 	@Autowired
 	private IBookService bookServ;
-	
+
 	@Autowired
 	private IFeedbackService feedbackService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> getBookById(@PathVariable int id){
-		return new ResponseEntity<>(bookServ.getBookById(id),HttpStatus.OK);
+	public ResponseEntity<?> getBookById(@PathVariable int id) {
+		return new ResponseEntity<>(bookServ.getBookById(id), HttpStatus.OK);
 	}
-	
-//	@GetMapping("/feedbacks/{id}")
-//	public ResponseEntity<?> getSomething(@PathVariable Integer id) {
-//		return new ResponseEntity<>(bookServ.getFeedbackByBookId(id),HttpStatus.OK); 
-//	}
+
 	@PostMapping("/addFeedback/{id}")
-	public ResponseEntity<?> addNewFeedback(@PathVariable Integer id, @RequestBody Feedback feedback){
+	public ResponseEntity<?> addNewFeedback(@PathVariable Integer id, @RequestBody Feedback feedback) {
 		return ResponseEntity.ok(feedbackService.addFeedback(id, feedback));
 	}
-	
-
 
 	@GetMapping("/title/{title}")
 	public ResponseEntity<?> getBooksByTitle(@PathVariable String title) {
@@ -50,13 +43,16 @@ public class BookController {
 	}
 
 	@GetMapping("/categories")
-	public ResponseEntity<?> getAllCategories(){
+	public ResponseEntity<?> getAllCategories() {
 		return ResponseEntity.ok(bookServ.getAllCategories());
 
 	}
-	
+
 	@GetMapping("/advanced")
-	public ResponseEntity<?> advancedSearchBooks(@RequestParam(name="category", required = false) String category,@RequestParam(name="rating", required = false) String rating,@RequestParam(name="min", required = false) String minPrice,@RequestParam(name="max", required = false) String maxPrice){
+	public ResponseEntity<?> advancedSearchBooks(@RequestParam(name = "category", required = false) String category,
+			@RequestParam(name = "rating", required = false) String rating,
+			@RequestParam(name = "min", required = false) String minPrice,
+			@RequestParam(name = "max", required = false) String maxPrice) {
 		return ResponseEntity.ok(bookServ.advancedFilterBooks(category, rating, minPrice, maxPrice));
 
 	}

@@ -7,25 +7,23 @@ import javax.persistence.Table;
 import javax.validation.constraints.Min;
 
 @Entity
-@Table(name="cart_items")
+@Table(name = "cart_items")
 public class CartItem extends BaseEntity {
-	
-	
+
 	@ManyToOne
-	@JoinColumn(name="user_id", nullable = false)
+	@JoinColumn(name = "user_id", nullable = false)
 	private User user;
-	
+
 	@ManyToOne
-	@JoinColumn(name="book_id", nullable = false)
+	@JoinColumn(name = "book_id", nullable = false)
 	private Book book;
-	
+
 	@Min(value = 1)
 	private int quantity;
 
 	public CartItem() {
 		super();
 	}
-	
 
 	public CartItem(User user, Book book, int quantity) {
 		super();
@@ -33,7 +31,6 @@ public class CartItem extends BaseEntity {
 		this.book = book;
 		this.quantity = quantity;
 	}
-
 
 	public Book getBook() {
 		return book;
@@ -50,24 +47,18 @@ public class CartItem extends BaseEntity {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	
-	
-	
 
 	public User getUser() {
 		return user;
 	}
 
-
 	public void setUser(User user) {
 		this.user = user;
 	}
-
 
 	@Override
 	public String toString() {
 		return "CartItems [ bookTitle=" + book.getBookTitle() + ", quantity=" + quantity + "]";
 	}
-	
-	
+
 }

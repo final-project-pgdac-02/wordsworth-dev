@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,19 +31,23 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
 	public String updateShippingStatus(Integer orderDetailId, ShippingStatus shippingStatus) {
 
 		OrderDetail orderDetailsObject = orderDetailsRepo.findById(orderDetailId)
-				.orElseThrow(() -> new ResourceNotFoundException("Given item with order detail id: "+orderDetailId+" not found in database!!"));
+				.orElseThrow(() -> new ResourceNotFoundException(
+						"Given item with order detail id: " + orderDetailId + " not found in database!!"));
 
 		orderDetailsObject.setStatus(shippingStatus);
+		if(shippingStatus==ShippingStatus.SHIPPED)
+			orderDetailsObject.setShippingDate(LocalDate.now());
 
-		return "Shipping Status for Order Detail with id: "+orderDetailId+" has been updated to: "+shippingStatus.toString();
+		return "Shipping Status for Order Detail with id: " + orderDetailId + " has been updated to: "
+				+ shippingStatus.toString();
 	}
 
 	@Override
 	public List<OrderDetailDto> getOrderDetailsByUserId(Integer userId) {
 		List<OrderDetail> orderDetails = orderDetailsRepo.findByUserIdOrderByOrderOrderDateDescOrderIdDesc(userId);
-		List<OrderDetailDto> orderDetailDtoList=new ArrayList<>();
-		for(OrderDetail o: orderDetails) {
-			OrderDetailDto newOrderDetail=new OrderDetailDto();
+		List<OrderDetailDto> orderDetailDtoList = new ArrayList<>();
+		for (OrderDetail o : orderDetails) {
+			OrderDetailDto newOrderDetail = new OrderDetailDto();
 			newOrderDetail.setOrderDetailId(o.getId());
 			newOrderDetail.setPrice(o.getBook().getPrice());
 			newOrderDetail.setQuantity(o.getQuantity());
@@ -55,10 +60,10 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
 			newOrderDetail.setOrderDate(o.getOrder().getOrderDate());
 			newOrderDetail.setDiscountedPrice(o.getPrice());
 			newOrderDetail.setUserId(userId);
-			
+
 			orderDetailDtoList.add(newOrderDetail);
 		}
-		
+
 		return orderDetailDtoList;
 	}
 
@@ -70,8 +75,9 @@ public class OrderDetailsServiceImpl implements IOrderDetailsService {
 
 	@Override
 	public String getShippingStatusByOrderDetailId(Integer orderDetailId) {
-		// TODO Auto-generated method stub
-		OrderDetail orderDetail= orderDetailsRepo.findById(orderDetailId).orElseThrow(()->new ResourceNotFoundException("OrderDetail with id: "+orderDetailId+" not found in database!!"));
+		OrderDetail orderDetail = orderDetailsRepo.findById(orderDetailId)
+				.orElseThrow(() -> new ResourceNotFoundException(
+						"OrderDetail with id: " + orderDetailId + " not found in database!!"));
 		return orderDetail.getStatus().toString();
 	}
 

@@ -18,7 +18,7 @@ public class MembershipServiceImpl implements IMembershipService {
 
 	@Autowired
 	private MembershipRepository membershipRepo;
-	
+
 	@Autowired
 	private UserRepository userRepo;
 
@@ -42,7 +42,8 @@ public class MembershipServiceImpl implements IMembershipService {
 				.orElseThrow(() -> new ResourceNotFoundException("invalid membership id!!!"));
 
 		updateMembershipDiscount.setDiscount(discountPercent);
-		return "Discount % updated for membership type : " + updateMembershipDiscount.getMembershipType()+" to: "+discountPercent;
+		return "Discount % updated for membership type : " + updateMembershipDiscount.getMembershipType() + " to: "
+				+ discountPercent;
 	}
 
 	@Override
@@ -62,14 +63,15 @@ public class MembershipServiceImpl implements IMembershipService {
 				.orElseThrow(() -> new ResourceNotFoundException("invalid membership id!!!"));
 
 		updateMembershipDiscount.setMembershipCost(membershipCost);
-		return "Membership cost updated for membership type : " + updateMembershipDiscount.getMembershipType() +" to:  "+membershipCost;
+		return "Membership cost updated for membership type : " + updateMembershipDiscount.getMembershipType()
+				+ " to:  " + membershipCost;
 	}
 
 	@Override
 	public Membership getMemberhsipByUserId(Integer userId) {
-		User user=userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User with user id: "+userId+" not found in database!!"));
+		User user = userRepo.findById(userId).orElseThrow(
+				() -> new ResourceNotFoundException("User with user id: " + userId + " not found in database!!"));
 		return user.getMembership();
 	}
 
-	
 }

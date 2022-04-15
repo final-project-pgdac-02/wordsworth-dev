@@ -15,20 +15,16 @@ import com.app.service.IOrderService;
 @CrossOrigin(origins = "http://localhost:3000/")
 
 public class OrderController {
-	
+
 	@Autowired
 	private IOrderService orderService;
-	
+
 	@PostMapping("/placeorder")
 	public String testPlaceOrder(@RequestBody PlaceOrderDto orderDto) {
 		try {
 			return orderService.placeOrderByUserId(orderDto.getUserId(), orderDto.getAddressId(), orderDto.getCardId());
-		}catch (Exception e) {
+		} catch (Exception e) {
 			return e.getMessage();
 		}
-		
-//		return "uid: "+orderDto.getUserId()+" cid: "+orderDto.getCardId()+" aid: "+orderDto.getAddressId();
 	}
-	
-
 }
