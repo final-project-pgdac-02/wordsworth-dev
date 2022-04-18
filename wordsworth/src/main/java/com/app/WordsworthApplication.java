@@ -18,7 +18,7 @@ public class WordsworthApplication {
 		SpringApplication.run(WordsworthApplication.class, args);
 	}
 	
-	@Scheduled(fixedDelay = 300000)
+	@Scheduled(fixedDelay = 60000)
 	void testScheduled() throws InterruptedException{
 		System.out.println("Scheduled method runnning");
 		System.out.println(feedbackServ.updateAllBookRatings());
