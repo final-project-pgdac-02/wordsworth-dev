@@ -83,7 +83,7 @@ public class BookServiceImpl implements IBookService {
 		Book temp = bookRepo.findById(bookId)
 				.orElseThrow(() -> new ResourceNotFoundException("Book by given ID not found!"));
 		double calculatedRating = feedbackRepo.findByBookId(bookId).stream().mapToDouble(f -> f.getRating()).average()
-				.orElse(temp.getAverageRating());
+				.orElse(1);
 		calculatedRating = Math.round(calculatedRating * 100.0) / 100.0;
 		temp.setAverageRating(calculatedRating);
 		return calculatedRating;
@@ -124,7 +124,7 @@ public class BookServiceImpl implements IBookService {
 		if (!rating.equals("") && (rating != null) && !(rating.toUpperCase().equals("NULL"))) {
 			rat = Double.parseDouble(rating);
 		}
-		if (!minPrice.equals("") && (minPrice != null) && !(rating.toUpperCase().equals("NULL"))) {
+		if (!minPrice.equals("") && (minPrice != null) && !(minPrice.toUpperCase().equals("NULL"))) {
 			min = Double.parseDouble(minPrice);
 		}
 		if (!maxPrice.equals("") && (maxPrice != null) && !(maxPrice.toUpperCase().equals("NULL"))) {

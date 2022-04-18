@@ -114,7 +114,7 @@ public class OrderServiceImpl implements IOrderService {
 	@Override
 	public String deleteOrderByUserId(Integer userId) {
 		orderRepo.deleteOrderByUserId(userId);
-		return "All Order Deleted of userId : " + userId + " Successfully!!";
+		return "All Orders Deleted of userId : " + userId + " Successfully!!";
 	}
 
 }
